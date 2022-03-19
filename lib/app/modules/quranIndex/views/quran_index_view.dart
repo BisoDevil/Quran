@@ -32,6 +32,7 @@ class QuranIndexView extends GetView<QuranIndexController> {
                     item.name,
                     style: Get.textTheme.headline6,
                   ),
+                  subtitle: Text(S.of(context).countAyat(item.numberOfAyahs)),
                   leading: Container(
                     child: Text(
                       item.number.toString(),

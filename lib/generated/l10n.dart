@@ -189,6 +189,26 @@ class S {
       args: [info],
     );
   }
+
+  /// `You're done!`
+  String get youreDone {
+    return Intl.message(
+      'You\'re done!',
+      name: 'youreDone',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `{count} Ayat`
+  String countAyat(Object count) {
+    return Intl.message(
+      '$count Ayat',
+      name: 'countAyat',
+      desc: '',
+      args: [count],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

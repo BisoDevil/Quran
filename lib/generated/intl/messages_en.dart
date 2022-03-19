@@ -20,26 +20,30 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(duration) => "in ${duration} m";
+  static String m0(count) => "${count} Ayat";
 
-  static String m1(info) => "Last read ${info}";
+  static String m1(duration) => "in ${duration} m";
+
+  static String m2(info) => "Last read ${info}";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "asr": MessageLookupByLibrary.simpleMessage("Asr"),
         "azkarAlmasa": MessageLookupByLibrary.simpleMessage("Azkar Almasa"),
         "azkarAlsabah": MessageLookupByLibrary.simpleMessage("Azkar Alsabah"),
+        "countAyat": m0,
         "dhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),
         "doaaFromSunna":
             MessageLookupByLibrary.simpleMessage("Doaa from sunna"),
         "fajr": MessageLookupByLibrary.simpleMessage("Fajr"),
-        "inDurationM": m0,
+        "inDurationM": m1,
         "information": MessageLookupByLibrary.simpleMessage("Information"),
         "isha": MessageLookupByLibrary.simpleMessage("Isha"),
         "khatma": MessageLookupByLibrary.simpleMessage("Khatma"),
-        "lastReadInfo": m1,
+        "lastReadInfo": m2,
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
-        "quran": MessageLookupByLibrary.simpleMessage("Quran")
+        "quran": MessageLookupByLibrary.simpleMessage("Quran"),
+        "youreDone": MessageLookupByLibrary.simpleMessage("You\'re done!")
       };
 }

@@ -12,5 +12,7 @@
   "maghrib": "Maghrib",
   "isha": "Isha",
   "khatma": "Khatma",
-  "lastReadInfo": "Last read {info}"
+  "lastReadInfo": "Last read {info}",
+  "youreDone": "You're done!",
+  "countAyat": "{count} Ayat"
 }

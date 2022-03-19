@@ -18,7 +18,7 @@ class OptionWidget extends StatelessWidget {
       child: InkWell(
         onTap: onPressed,
         child: Padding(
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.all(8),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [

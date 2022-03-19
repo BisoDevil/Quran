@@ -65,6 +65,9 @@ class HomeController extends GetxController {
     } else if (adhanTime.isha.isAfter(_now)) {
       nextAdhanTime.value = adhanTime.isha.difference(_now).inMinutes;
       nextAdhan.value = S.current.isha;
+    } else {
+      nextAdhanTime.value = 0;
+      nextAdhan.value = S.current.youreDone;
     }
 
     update();

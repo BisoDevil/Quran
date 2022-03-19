@@ -8,8 +8,9 @@ void main() {
       builder: (context, orientation, deviceType) => GetMaterialApp(
         initialRoute: AppPages.INITIAL,
         getPages: AppPages.routes,
-        defaultTransition: Transition.circularReveal,
+        defaultTransition: Transition.cupertino,
         theme: lightTheme,
+        locale: Locale('ar'),
         localizationsDelegates: [
           S.delegate,
           GlobalMaterialLocalizations.delegate,

@@ -16,6 +16,7 @@ dependencies:
   flutter_svg: ^1.0.3
   geocoding: ^2.0.4
   get: 4.6.1
+  get_storage: ^2.0.3
   location: ^4.3.0
   sizer: ^2.0.15
   supercharged: ^2.1.1

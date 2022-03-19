@@ -22,14 +22,11 @@ class SurahView extends GetView<SurahController> {
         builder: (_) {
           return SingleChildScrollView(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
+            child: SelectableText(
               _.fullSurah,
               style: Get.textTheme.headline6!.copyWith(
                 height: 2,
               ),
-
-              // softWrap: true,
-              // textAlign: TextAlign.justify,
               textDirection: TextDirection.rtl,
             ),
           );
