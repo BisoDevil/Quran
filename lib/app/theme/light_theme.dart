@@ -25,6 +25,7 @@ ThemeData lightTheme = ThemeData(
   ),
   appBarTheme: AppBarTheme(
     elevation: 0,
+    backgroundColor: Colors.transparent,
     systemOverlayStyle: SystemUiOverlayStyle(
       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
       statusBarBrightness: Brightness.light,

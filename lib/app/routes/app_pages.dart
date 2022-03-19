@@ -1,5 +1,9 @@
 import 'package:get/get.dart';
 
+import '../modules/azkar/bindings/azkar_binding.dart';
+import '../modules/azkar/views/azkar_view.dart';
+import '../modules/doaa/bindings/doaa_binding.dart';
+import '../modules/doaa/views/doaa_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/quranIndex/bindings/quran_index_binding.dart';
@@ -31,6 +35,16 @@ class AppPages {
       name: _Paths.SURAH,
       page: () => SurahView(),
       binding: SurahBinding(),
+    ),
+    GetPage(
+      name: _Paths.AZKAR,
+      page: () => AzkarView(),
+      binding: AzkarBinding(),
+    ),
+    GetPage(
+      name: _Paths.DOAA,
+      page: () => DoaaView(),
+      binding: DoaaBinding(),
     ),
   ];
 }

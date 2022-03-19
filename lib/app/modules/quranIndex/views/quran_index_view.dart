@@ -11,9 +11,6 @@ class QuranIndexView extends GetView<QuranIndexController> {
     return Scaffold(
       appBar: AppBar(
         title: Text(S.of(context).quran),
-        elevation: 0,
-        centerTitle: false,
-        backgroundColor: Colors.transparent,
       ),
       body: GetBuilder<QuranIndexController>(
         builder: (_) {

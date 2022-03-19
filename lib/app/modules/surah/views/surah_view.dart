@@ -14,9 +14,6 @@ class SurahView extends GetView<SurahController> {
             controller.surahName.value,
           ),
         ),
-        elevation: 0,
-        centerTitle: false,
-        backgroundColor: Colors.transparent,
       ),
       body: GetBuilder<SurahController>(
         builder: (_) {

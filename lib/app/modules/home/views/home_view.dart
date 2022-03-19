@@ -34,7 +34,7 @@ class HomeView extends GetView<HomeController> {
                   )
                 ],
               ),
-              addVerticalSpace(7),
+              addVerticalSpace(5),
               Obx(
                 () => Text(
                   controller.nextAdhan.value,
@@ -45,9 +45,11 @@ class HomeView extends GetView<HomeController> {
               ),
               Obx(
                 () => Text(
-                  S.of(context).inDurationM(controller.nextAdhanTime.value <= 0
+                  controller.nextAdhanTime.value <= 0
                       ? ''
-                      : controller.nextAdhanTime.value),
+                      : S
+                          .of(context)
+                          .inDurationM(controller.nextAdhanTime.value),
                   style: Get.textTheme.headline6,
                 ),
               ),
@@ -83,14 +85,25 @@ class HomeView extends GetView<HomeController> {
                       },
                     ),
                     OptionWidget(
-                        title: S.of(context).azkarAlsabah,
-                        svgPath: "assets/icons/azkar.svg"),
+                      title: S.of(context).azkarAlsabah,
+                      svgPath: "assets/icons/azkar.svg",
+                      onPressed: () {
+                        Get.toNamed(Routes.AZKAR, arguments: 'morning');
+                      },
+                    ),
                     OptionWidget(
-                        title: S.of(context).azkarAlmasa,
-                        svgPath: "assets/icons/night.svg"),
+                      title: S.of(context).azkarAlmasa,
+                      svgPath: "assets/icons/night.svg",
+                      onPressed: () {
+                        Get.toNamed(Routes.AZKAR, arguments: 'night');
+                      },
+                    ),
                     OptionWidget(
                       title: S.of(context).doaaFromSunna,
                       svgPath: "assets/icons/open_book.svg",
+                      onPressed: () {
+                        Get.toNamed(Routes.DOAA);
+                      },
                     ),
                     OptionWidget(
                       title: S.of(context).location,

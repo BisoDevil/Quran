@@ -14,5 +14,6 @@
   "khatma": "Khatma",
   "lastReadInfo": "Last read {info}",
   "youreDone": "You're done!",
-  "countAyat": "{count} Ayat"
+  "countAyat": "{count} Ayat",
+  "repeatTimes": "{repeat} times"
 }

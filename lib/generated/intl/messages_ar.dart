@@ -26,6 +26,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m2(info) => "Last read ${info}";
 
+  static String m3(repeat) => "${repeat} times";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "asr": MessageLookupByLibrary.simpleMessage("asr"),
@@ -44,6 +46,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "maghrib": MessageLookupByLibrary.simpleMessage("maghrib"),
         "quran": MessageLookupByLibrary.simpleMessage("Quran"),
+        "repeatTimes": m3,
         "youreDone": MessageLookupByLibrary.simpleMessage("You\'re done!")
       };
 }

@@ -209,6 +209,16 @@ class S {
       args: [count],
     );
   }
+
+  /// `{repeat} times`
+  String repeatTimes(Object repeat) {
+    return Intl.message(
+      '$repeat times',
+      name: 'repeatTimes',
+      desc: '',
+      args: [repeat],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

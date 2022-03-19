@@ -13,6 +13,7 @@ void main() {
         locale: Locale('ar'),
         localizationsDelegates: [
           S.delegate,
+          GlobalCupertinoLocalizations.delegate,
           GlobalMaterialLocalizations.delegate,
           GlobalWidgetsLocalizations.delegate,
         ],
