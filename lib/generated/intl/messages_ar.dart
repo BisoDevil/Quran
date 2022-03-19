@@ -20,33 +20,32 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ar';
 
-  static String m0(count) => "${count} Ayat";
+  static String m0(count) => "${count} ايه";
 
   static String m1(duration) => "خلال ${duration} د";
 
-  static String m2(info) => "Last read ${info}";
+  static String m2(info) => "اخر قراءة ${info}";
 
-  static String m3(repeat) => "${repeat} times";
+  static String m3(repeat) => "${repeat} مرات";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
-        "asr": MessageLookupByLibrary.simpleMessage("asr"),
-        "azkarAlmasa": MessageLookupByLibrary.simpleMessage("Azkar Almasa"),
-        "azkarAlsabah": MessageLookupByLibrary.simpleMessage("Azkar Alsabah"),
+        "asr": MessageLookupByLibrary.simpleMessage("العصر"),
+        "azkarAlmasa": MessageLookupByLibrary.simpleMessage("اذكار المساء"),
+        "azkarAlsabah": MessageLookupByLibrary.simpleMessage("اذكار الصباح"),
         "countAyat": m0,
-        "dhuhr": MessageLookupByLibrary.simpleMessage("dhuhr"),
-        "doaaFromSunna":
-            MessageLookupByLibrary.simpleMessage("Doaa from sunna"),
-        "fajr": MessageLookupByLibrary.simpleMessage("fajr"),
+        "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),
+        "doaaFromSunna": MessageLookupByLibrary.simpleMessage("ادعية من السنة"),
+        "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
         "inDurationM": m1,
-        "information": MessageLookupByLibrary.simpleMessage("Information"),
-        "isha": MessageLookupByLibrary.simpleMessage("isha"),
-        "khatma": MessageLookupByLibrary.simpleMessage("Khatma"),
+        "information": MessageLookupByLibrary.simpleMessage("معلومات"),
+        "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
+        "khatma": MessageLookupByLibrary.simpleMessage("الخاتمة"),
         "lastReadInfo": m2,
-        "location": MessageLookupByLibrary.simpleMessage("Location"),
-        "maghrib": MessageLookupByLibrary.simpleMessage("maghrib"),
-        "quran": MessageLookupByLibrary.simpleMessage("Quran"),
+        "location": MessageLookupByLibrary.simpleMessage("الموقع"),
+        "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
+        "quran": MessageLookupByLibrary.simpleMessage("القران"),
         "repeatTimes": m3,
-        "youreDone": MessageLookupByLibrary.simpleMessage("You\'re done!")
+        "youreDone": MessageLookupByLibrary.simpleMessage("اكتمل يومك")
       };
 }

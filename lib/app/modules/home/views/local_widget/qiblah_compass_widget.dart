@@ -39,21 +39,6 @@ class _QiblahCompassState extends State<QiblahCompass> {
               case LocationPermission.whileInUse:
                 return QiblahCompassWidget();
 
-              // case LocationPermission.denied:
-              //   return LocationErrorWidget(
-              //     error: "Location service permission denied",
-              //     callback: _checkLocationStatus,
-              //   );
-              // case LocationPermission.deniedForever:
-              //   return LocationErrorWidget(
-              //     error: "Location service Denied Forever !",
-              //     callback: _checkLocationStatus,
-              //   );
-              // case GeolocationStatus.unknown:
-              //   return LocationErrorWidget(
-              //     error: "Unknown Location service error",
-              //     callback: _checkLocationStatus,
-              //   );
               default:
                 return Container();
             }
@@ -134,8 +119,8 @@ class QiblahCompassWidget extends StatelessWidget {
             ),
             SvgPicture.asset(
               'assets/images/compass.svg',
-              height: 30,
-              width: 30,
+              height: 26,
+              width: 26,
             ),
           ],
         );
