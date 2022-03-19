@@ -7,10 +7,12 @@ abstract class Routes {
   Routes._();
   static const HOME = _Paths.HOME;
   static const QURAN_INDEX = _Paths.QURAN_INDEX;
+  static const SURAH = _Paths.SURAH;
 }
 
 abstract class _Paths {
   _Paths._();
   static const HOME = '/home';
   static const QURAN_INDEX = '/quran-index';
+  static const SURAH = '/surah';
 }

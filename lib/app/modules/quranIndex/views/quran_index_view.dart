@@ -1,4 +1,6 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
+import 'package:quran/app/routes/app_pages.dart';
+import 'package:quran/app/util/widget_util.dart';
 
 import '../../../../index.dart';
 import '../controllers/quran_index_controller.dart';
@@ -13,16 +15,32 @@ class QuranIndexView extends GetView<QuranIndexController> {
         centerTitle: false,
         backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        children: [
-          KhatmaWidget(percent: .3, info: "info"),
-          Center(
-            child: Text(
-              'QuranIndexView is working',
-              style: TextStyle(fontSize: 20),
-            ),
-          ),
-        ],
+      body: GetBuilder<QuranIndexController>(
+        builder: (_) {
+          return ListView(
+            padding: EdgeInsets.symmetric(horizontal: 3.w),
+            children: [
+              KhatmaWidget(percent: .3, info: "info"),
+              addVerticalSpace(3),
+              for (var item in controller.surahs)
+                ListTile(
+                  dense: true,
+                  onTap: () {
+                    Get.toNamed(Routes.SURAH, arguments: item.number);
+                  },
+                  title: Text(
+                    item.name,
+                    style: Get.textTheme.headline6,
+                  ),
+                  leading: Container(
+                    child: Text(
+                      item.number.toString(),
+                    ),
+                  ),
+                )
+            ],
+          );
+        },
       ),
     );
   }

@@ -1,20 +1,19 @@
 import 'package:get/get.dart';
+import 'package:quran/app/data/models/surah_model.dart';
+import 'package:quran/app/data/providers/surah_provider.dart';
 
 class QuranIndexController extends GetxController {
-  //TODO: Implement QuranIndexController
+  final SurahProvider _surahProvider = Get.find<SurahProvider>();
+  List<Surah> surahs = [];
 
-  final count = 0.obs;
   @override
   void onInit() {
+    _getAllSurah();
     super.onInit();
   }
 
-  @override
-  void onReady() {
-    super.onReady();
+  _getAllSurah() async {
+    surahs = await _surahProvider.getAllSurah();
+    update();
   }
-
-  @override
-  void onClose() {}
-  void increment() => count.value++;
 }

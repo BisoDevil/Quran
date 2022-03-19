@@ -1,16 +1,16 @@
 import 'package:get/get.dart';
 import 'package:quran/app/data/providers/surah_provider.dart';
 
-import '../controllers/quran_index_controller.dart';
+import '../controllers/surah_controller.dart';
 
-class QuranIndexBinding extends Bindings {
+class SurahBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<SurahProvider>(
       () => SurahProvider(),
     );
-    Get.lazyPut<QuranIndexController>(
-      () => QuranIndexController(),
+    Get.lazyPut<SurahController>(
+      () => SurahController(),
     );
   }
 }

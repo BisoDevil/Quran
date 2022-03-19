@@ -29,6 +29,9 @@ ThemeData lightTheme = ThemeData(
       statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
       statusBarBrightness: Brightness.light,
     ),
+    iconTheme: IconThemeData(
+      color: Constants.mainColor,
+    ),
     centerTitle: false,
     titleTextStyle: TextStyle(
       color: Colors.black,
