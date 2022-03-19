@@ -1,10 +1,6 @@
-import 'package:flutter/material.dart';
-
-import 'package:get/get.dart';
 import 'package:quran/app/theme/light_theme.dart';
-import 'package:sizer/sizer.dart';
-
 import 'app/routes/app_pages.dart';
+import 'index.dart';
 
 void main() {
   runApp(
@@ -14,6 +10,12 @@ void main() {
         getPages: AppPages.routes,
         defaultTransition: Transition.circularReveal,
         theme: lightTheme,
+        localizationsDelegates: [
+          S.delegate,
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetsLocalizations.delegate,
+        ],
+        supportedLocales: S.delegate.supportedLocales,
       ),
     ),
   );

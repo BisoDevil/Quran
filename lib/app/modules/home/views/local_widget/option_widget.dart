@@ -3,8 +3,9 @@ import '../../../../../index.dart';
 class OptionWidget extends StatelessWidget {
   final String title;
   final String svgPath;
-
-  const OptionWidget({Key? key, required this.title, required this.svgPath})
+  final VoidCallback? onPressed;
+  const OptionWidget(
+      {Key? key, required this.title, required this.svgPath, this.onPressed})
       : super(key: key);
 
   @override
@@ -14,23 +15,26 @@ class OptionWidget extends StatelessWidget {
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Padding(
-        padding: const EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SvgPicture.asset(
-              svgPath,
-              height: 35,
-              alignment: Alignment.topLeft,
-              width: 35,
-            ),
-            Spacer(),
-            Text(
-              title,
-              style: Get.textTheme.bodyText1,
-            ),
-          ],
+      child: InkWell(
+        onTap: onPressed,
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              SvgPicture.asset(
+                svgPath,
+                height: 35,
+                alignment: Alignment.topLeft,
+                width: 35,
+              ),
+              Spacer(),
+              Text(
+                title,
+                style: Get.textTheme.bodyText1,
+              ),
+            ],
+          ),
         ),
       ),
     );

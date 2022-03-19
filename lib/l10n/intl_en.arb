@@ -1,0 +1,16 @@
+{
+  "inDurationM": "in {duration} m",
+  "quran": "Quran",
+  "azkarAlsabah": "Azkar Alsabah",
+  "azkarAlmasa": "Azkar Almasa",
+  "doaaFromSunna": "Doaa from sunna",
+  "location": "Location",
+  "information": "Information",
+  "fajr": "Fajr",
+  "dhuhr": "Dhuhr",
+  "asr": "Asr",
+  "maghrib": "Maghrib",
+  "isha": "Isha",
+  "khatma": "Khatma",
+  "lastReadInfo": "Last read {info}"
+}

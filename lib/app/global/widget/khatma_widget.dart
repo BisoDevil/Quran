@@ -3,7 +3,10 @@ import 'package:quran/app/util/widget_util.dart';
 import '../../../index.dart';
 
 class KhatmaWidget extends StatelessWidget {
-  const KhatmaWidget({Key? key}) : super(key: key);
+  final double percent;
+  final String info;
+  const KhatmaWidget({Key? key, required this.percent, required this.info})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,13 +29,13 @@ class KhatmaWidget extends StatelessWidget {
                   children: [
                     addVerticalSpace(1),
                     Text(
-                      "Khatma",
+                      S.of(context).khatma,
                       style: Get.textTheme.headline4!.copyWith(
                           color: Colors.brown[800],
                           fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      "Last read ins",
+                      S.of(context).lastReadInfo(info),
                     ),
                     Spacer(),
                     Row(
@@ -44,14 +47,14 @@ class KhatmaWidget extends StatelessWidget {
                               borderRadius: BorderRadius.circular(40),
                             ),
                             child: LinearProgressIndicator(
-                              value: .3,
+                              value: percent,
                               minHeight: 8,
                             ),
                           ),
                         ),
                         addHorizontalSpace(1),
                         Text(
-                          '30 %',
+                          '${percent * 100} %',
                           style: Get.textTheme.bodyText2?.copyWith(
                             color: Colors.white,
                           ),

@@ -1,6 +1,7 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
 import 'package:quran/app/modules/home/views/local_widget/option_widget.dart';
 import 'package:quran/app/modules/home/views/local_widget/qiblah_compass_widget.dart';
+import 'package:quran/app/routes/app_pages.dart';
 import 'package:quran/app/util/widget_util.dart';
 
 import '../../../../index.dart';
@@ -34,15 +35,21 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
               addVerticalSpace(7),
-              Text(
-                "Maghrib",
-                style: Get.textTheme.headline3?.copyWith(
-                  fontWeight: FontWeight.bold,
+              Obx(
+                () => Text(
+                  controller.nextAdhan.value,
+                  style: Get.textTheme.headline3?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
               ),
-              Text(
-                "in 28m",
-                style: Get.textTheme.headline6,
+              Obx(
+                () => Text(
+                  S.of(context).inDurationM(controller.nextAdhanTime.value <= 0
+                      ? ''
+                      : controller.nextAdhanTime.value),
+                  style: Get.textTheme.headline6,
+                ),
               ),
               addVerticalSpace(1.5),
               Row(
@@ -56,7 +63,10 @@ class HomeView extends GetView<HomeController> {
                 ],
               ),
               addVerticalSpace(3),
-              KhatmaWidget(),
+              KhatmaWidget(
+                percent: .5,
+                info: "Cow 168",
+              ),
               addVerticalSpace(3),
               Expanded(
                 child: GridView.count(
@@ -66,25 +76,28 @@ class HomeView extends GetView<HomeController> {
                   childAspectRatio: 1,
                   children: [
                     OptionWidget(
-                      title: "Quran",
+                      title: S.of(context).quran,
                       svgPath: "assets/icons/quran_book.svg",
+                      onPressed: () {
+                        Get.toNamed(Routes.QURAN_INDEX);
+                      },
                     ),
                     OptionWidget(
-                        title: "Azkar Alsabah",
+                        title: S.of(context).azkarAlsabah,
                         svgPath: "assets/icons/azkar.svg"),
                     OptionWidget(
-                        title: "Azkar Almasa",
+                        title: S.of(context).azkarAlmasa,
                         svgPath: "assets/icons/night.svg"),
                     OptionWidget(
-                      title: "Doaa from sunna",
+                      title: S.of(context).doaaFromSunna,
                       svgPath: "assets/icons/open_book.svg",
                     ),
                     OptionWidget(
-                      title: "Location",
+                      title: S.of(context).location,
                       svgPath: "assets/icons/location.svg",
                     ),
                     OptionWidget(
-                      title: "Information",
+                      title: S.of(context).information,
                       svgPath: "assets/icons/info.svg",
                     ),
                   ],
