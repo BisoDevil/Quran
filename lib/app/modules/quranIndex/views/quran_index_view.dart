@@ -1,4 +1,5 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
+import 'package:quran/app/modules/home/controllers/home_controller.dart';
 import 'package:quran/app/routes/app_pages.dart';
 import 'package:quran/app/util/widget_util.dart';
 
@@ -14,10 +15,24 @@ class QuranIndexView extends GetView<QuranIndexController> {
       ),
       body: GetBuilder<QuranIndexController>(
         builder: (_) {
+          if (_.surahs.isEmpty) {
+            return Center(
+              child: CircularProgressIndicator(
+                strokeWidth: 1,
+              ),
+            );
+          }
           return ListView(
             padding: EdgeInsets.symmetric(horizontal: 3.w),
             children: [
-              KhatmaWidget(percent: .3, info: "info"),
+              GetBuilder<HomeController>(
+                builder: (_) {
+                  return KhatmaWidget(
+                    info: _.info.value,
+                    percent: _.percent.value,
+                  );
+                },
+              ),
               addVerticalSpace(3),
               for (var item in controller.surahs)
                 ListTile(

@@ -1,8 +1,10 @@
+import 'package:get_storage/get_storage.dart';
 import 'package:quran/app/theme/light_theme.dart';
 import 'app/routes/app_pages.dart';
 import 'index.dart';
 
-void main() {
+Future<void> main() async {
+  await GetStorage.init();
   runApp(
     Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(

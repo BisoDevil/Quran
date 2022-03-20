@@ -24,9 +24,9 @@ class OptionWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 svgPath,
-                height: 35,
+                height: 45,
                 alignment: Alignment.topLeft,
-                width: 35,
+                width: 45,
               ),
               Spacer(),
               Text(

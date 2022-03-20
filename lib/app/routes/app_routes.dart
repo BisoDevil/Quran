@@ -10,6 +10,7 @@ abstract class Routes {
   static const SURAH = _Paths.SURAH;
   static const AZKAR = _Paths.AZKAR;
   static const DOAA = _Paths.DOAA;
+  static const INFO = _Paths.INFO;
 }
 
 abstract class _Paths {
@@ -19,4 +20,5 @@ abstract class _Paths {
   static const SURAH = '/surah';
   static const AZKAR = '/azkar';
   static const DOAA = '/doaa';
+  static const INFO = '/info';
 }

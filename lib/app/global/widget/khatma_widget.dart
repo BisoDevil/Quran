@@ -5,13 +5,14 @@ import '../../../index.dart';
 class KhatmaWidget extends StatelessWidget {
   final double percent;
   final String info;
+
   const KhatmaWidget({Key? key, required this.percent, required this.info})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: Color.fromARGB(255, 224, 190, 163),
+      color: Color(0xffE1D3B0),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -54,7 +55,7 @@ class KhatmaWidget extends StatelessWidget {
                         ),
                         addHorizontalSpace(1),
                         Text(
-                          '${percent * 100} %',
+                          '${(percent * 100).toStringAsFixed(1)} %',
                           style: Get.textTheme.bodyText2?.copyWith(
                             color: Colors.white,
                           ),
