@@ -117,8 +117,8 @@ class QiblahCompassWidget extends StatelessWidget {
                 ],
               ),
             ),
-            SvgPicture.asset(
-              'assets/images/compass.svg',
+            Image.asset(
+              'assets/icons/qibla.png',
               height: 26,
               width: 26,
             ),

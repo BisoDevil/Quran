@@ -40,7 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "inDurationM": m1,
         "information": MessageLookupByLibrary.simpleMessage("معلومات"),
         "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
-        "khatma": MessageLookupByLibrary.simpleMessage("الخاتمة"),
+        "khatma": MessageLookupByLibrary.simpleMessage("الختمة"),
         "lastReadInfo": m2,
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),

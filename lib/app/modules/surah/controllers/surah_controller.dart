@@ -17,20 +17,44 @@ class SurahController extends GetxController {
     super.onInit();
   }
 
+//{
+  //   "surah": item.number,
+  //   "fromKhatma": false,
+  // }
   _getAyahs() async {
-    surah = await _surahProvider.getSurah(Get.arguments);
+    surah = await _surahProvider.getSurah(Get.arguments['surah']);
     surahName.value = surah!.name;
 
     update();
+    if (Get.arguments['fromKhatma']) {
+      if (_box.hasData('khatma')) {
+        lastRead = _box.read('khatma')['percent'] ?? 0;
+        await Future.delayed(Duration(seconds: 1), () {
+          Scrollable.ensureVisible(
+            GlobalObjectKey(lastRead).currentContext!,
+            duration: Duration(
+              milliseconds: 300,
+            ),
+          );
+        });
+      }
+    }
   }
 
   @override
-  Future<void> onClose() async {
+  void onClose() {
+    _close();
+    super.onClose();
+  }
+
+  _close() async {
     if (surah != null) {
-      await _box.write("khatma", {"surah": surah!.name, "percent": lastRead});
+      await _box.write("khatma", {
+        "surah": surah!.name,
+        "percent": lastRead,
+        "surahNo": surah!.number,
+      });
       Get.find<HomeController>().getData();
     }
-
-    super.onClose();
   }
 }

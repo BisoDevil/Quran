@@ -16,13 +16,19 @@ dependencies:
   flutter_svg: ^1.0.3
   flutter_widget_from_html_core: ^0.8.5
   geocoding: ^2.0.4
+  geolocator: ^8.2.0
   get: 4.6.1
   get_storage: ^2.0.3
-  location: ^4.3.0
+  
   map_launcher: ^2.2.1+1
   sizer: ^2.0.15
   supercharged: ^2.1.1
   visibility_detector: ^0.2.2
+
+
+
+dependency_overrides: 
+  geolocator: ^8.2.0
 
 dev_dependencies:
   flutter_launcher_icons: "^0.9.2"

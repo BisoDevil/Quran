@@ -30,6 +30,12 @@ class QuranIndexView extends GetView<QuranIndexController> {
                   return KhatmaWidget(
                     info: _.info.value,
                     percent: _.percent.value,
+                    onPressed: () {
+                      Get.toNamed(Routes.SURAH, arguments: {
+                        "surah": _.surahNo.value,
+                        "fromKhatma": true,
+                      });
+                    },
                   );
                 },
               ),
@@ -38,7 +44,10 @@ class QuranIndexView extends GetView<QuranIndexController> {
                 ListTile(
                   dense: true,
                   onTap: () {
-                    Get.toNamed(Routes.SURAH, arguments: item.number);
+                    Get.toNamed(Routes.SURAH, arguments: {
+                      "surah": item.number,
+                      "fromKhatma": false,
+                    });
                   },
                   title: Text(
                     item.name,

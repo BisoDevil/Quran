@@ -75,6 +75,12 @@ class HomeView extends GetView<HomeController> {
                   Obx(() => KhatmaWidget(
                         info: controller.info.value,
                         percent: controller.percent.value,
+                        onPressed: () {
+                          Get.toNamed(Routes.SURAH, arguments: {
+                            "surah": controller.surahNo.value,
+                            "fromKhatma": true,
+                          });
+                        },
                       )),
                   addVerticalSpace(3),
                   Expanded(

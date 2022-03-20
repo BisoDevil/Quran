@@ -48,11 +48,13 @@ class SurahView extends GetView<SurahController> {
                                 height: 40,
                               ),
                               VisibilityDetector(
-                                key: Key(item.number.toString()),
+                                key: GlobalObjectKey(item.number),
+                                // key: Key(item.number.toString()),
                                 onVisibilityChanged: (VisibilityInfo info) {
                                   if (info.visibleFraction == 1 &&
-                                      item.numberInSurah > _.lastRead) {
+                                      item.number > _.lastRead) {
                                     _.lastRead = item.number;
+                                    print(_.lastRead);
                                   }
                                 },
                                 child: Text(
