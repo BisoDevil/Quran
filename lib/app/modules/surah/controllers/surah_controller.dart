@@ -7,7 +7,7 @@ import 'package:quran/index.dart';
 class SurahController extends GetxController {
   final SurahProvider _surahProvider = Get.find<SurahProvider>();
   final GetStorage _box = Get.find<GetStorage>();
-  String fullSurah = "";
+
   Surah? surah;
   int lastRead = 0;
   var surahName = "".obs;
@@ -20,9 +20,7 @@ class SurahController extends GetxController {
   _getAyahs() async {
     surah = await _surahProvider.getSurah(Get.arguments);
     surahName.value = surah!.name;
-    for (var item in surah!.ayahs!) {
-      fullSurah += "${item.text}《${item.numberInSurah}》";
-    }
+
     update();
   }
 
