@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:get/get.dart';
 import 'package:visibility_detector/visibility_detector.dart';
 
@@ -50,13 +49,15 @@ class SurahView extends GetView<SurahController> {
                               VisibilityDetector(
                                 key: GlobalObjectKey(item.number),
                                 // key: Key(item.number.toString()),
+
                                 onVisibilityChanged: (VisibilityInfo info) {
-                                  if (info.visibleFraction == 1 &&
+                                  if (info.visibleFraction == 0 &&
                                       item.number > _.lastRead) {
                                     _.lastRead = item.number;
                                     print(_.lastRead);
                                   }
                                 },
+
                                 child: Text(
                                   item.numberInSurah.toString(),
                                   style: Get.textTheme.caption!.copyWith(
@@ -79,16 +80,6 @@ class SurahView extends GetView<SurahController> {
               textDirection: TextDirection.rtl,
             ),
           );
-          // return SingleChildScrollView(
-          //   padding: const EdgeInsets.all(8.0),
-          //   child: SelectableText(
-          //     _.fullSurah,
-          //     style: Get.textTheme.headline6!.copyWith(
-          //       height: 2,
-          //     ),
-          //     textDirection: TextDirection.rtl,
-          //   ),
-          // );
         },
       ),
     );

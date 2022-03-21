@@ -26,6 +26,7 @@ class SurahController extends GetxController {
     surahName.value = surah!.name;
 
     update();
+
     if (Get.arguments['fromKhatma']) {
       if (_box.hasData('khatma')) {
         lastRead = _box.read('khatma')['percent'] ?? 0;

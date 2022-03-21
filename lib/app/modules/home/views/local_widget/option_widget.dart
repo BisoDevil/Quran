@@ -24,14 +24,14 @@ class OptionWidget extends StatelessWidget {
             children: [
               SvgPicture.asset(
                 svgPath,
-                height: 45,
+                height: 48,
                 alignment: Alignment.topLeft,
-                width: 45,
+                width: 48,
               ),
               Spacer(),
               Text(
                 title,
-                style: Get.textTheme.bodyText1,
+                style: Get.textTheme.titleMedium,
               ),
             ],
           ),
