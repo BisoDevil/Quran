@@ -17,24 +17,31 @@ class OptionWidget extends StatelessWidget {
       ),
       child: InkWell(
         onTap: onPressed,
-        child: Padding(
-          padding: const EdgeInsets.all(8),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              SvgPicture.asset(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(
+              flex: 2,
+              child: SvgPicture.asset(
                 svgPath,
-                height: 48,
-                alignment: Alignment.topLeft,
-                width: 48,
+                height: 30,
+                width: 30,
+                alignment: Alignment.topRight,
               ),
-              Spacer(),
-              Text(
-                title,
-                style: Get.textTheme.titleMedium,
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                child: Text(
+                  title,
+                  style: Get.textTheme.caption?.copyWith(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
+                ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );

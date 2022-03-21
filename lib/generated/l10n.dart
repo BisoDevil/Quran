@@ -219,6 +219,36 @@ class S {
       args: [repeat],
     );
   }
+
+  /// `Share`
+  String get share {
+    return Intl.message(
+      'Share',
+      name: 'share',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Bookmark`
+  String get bookmark {
+    return Intl.message(
+      'Bookmark',
+      name: 'bookmark',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Prayer time`
+  String get prayerTime {
+    return Intl.message(
+      'Prayer time',
+      name: 'prayerTime',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

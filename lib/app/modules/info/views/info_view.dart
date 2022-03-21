@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
+import 'package:quran/app/util/widget_util.dart';
 import 'package:quran/generated/l10n.dart';
 
 import '../controllers/info_controller.dart';
@@ -12,10 +13,15 @@ class InfoView extends GetView<InfoController> {
       appBar: AppBar(
         title: Text(S.of(context).information),
       ),
+      backgroundColor: ThemeData.fallback().scaffoldBackgroundColor,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(10),
-        child: HtmlWidget(
-          '''
+        child: Column(
+          children: [
+            Image.asset("assets/images/mosque.jpg"),
+            addVerticalSpace(3),
+            HtmlWidget(
+              '''
      <p dir="rtl" align="center"><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><u><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;"><strong>مسجد الجوزاء &ndash; لؤلؤة كورنيش الخبر</strong></span></span></u></span></span></p>
 <p dir="rtl" align="right">&nbsp;</p>
 <p dir="rtl" align="right"><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="color: #7030a0;"><u><span style="font-family: 'Traditional Arabic';"><span style="font-size: large;"><strong>تمهيد </strong></span></span></u></span></span></span></p>
@@ -46,6 +52,8 @@ class InfoView extends GetView<InfoController> {
 <p dir="rtl" align="right"><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;">يزين المسجد </span></span></span></span><span style="font-family: 'Traditional Arabic', serif;"><span style="font-size: medium;">22 </span></span><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;">ثرية صنعت من النحاس خصيصا للمسجد بأشكال واحجام مختلفة يتوسطها الثريا المركزية في وسط القبة الرئيسية و بأربع حلقات متالية تحتوي على قناديل زجاجية بزخارف اسلامية وأسماء محفورة </span></span></span></span><span style="font-family: 'Traditional Arabic', serif;"><span style="font-size: medium;">( </span></span><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;">الله &ndash; محمد</span></span></span></span><span style="font-family: 'Traditional Arabic', serif;"><span style="font-size: medium;">) </span></span><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;">بالاضافة الى شعلات إنارة في كل زاوية من المسجد</span></span></span></span><span style="font-family: 'Traditional Arabic', serif;"><span style="font-size: medium;">.</span></span></p>
 <p dir="rtl" align="right"><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;">كما يحيط المسجد من الخارج إنارات ليلية مختلفة تضيء النافورة والقباب والأشجار مما يعطي روحا جمالية وألقاً للمسجد ليلاً</span></span></span></span><span style="font-family: 'Traditional Arabic', serif;"><span style="font-size: medium;">.</span></span></p>
       ''',
+            ),
+          ],
         ),
       ),
     );

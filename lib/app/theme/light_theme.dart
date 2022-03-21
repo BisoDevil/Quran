@@ -13,6 +13,7 @@ ThemeData lightTheme = ThemeData(
   iconTheme: IconThemeData(
     color: Constants.mainColor,
   ),
+  scaffoldBackgroundColor: Colors.transparent,
   fontFamily: Constants.fontFamily,
   elevatedButtonTheme: ElevatedButtonThemeData(
     style: ElevatedButton.styleFrom(

@@ -13,20 +13,21 @@ class KhatmaWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: Color(0xffE1D3B0),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10),
-      ),
-      elevation: 3,
-      child: InkWell(
-        onTap: onPressed,
+    return GestureDetector(
+      onTap: onPressed,
+      child: Card(
+        color: Color(0xffE1D3B0),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        elevation: 3,
         child: Container(
           height: 20.h,
           child: Row(
             children: [
               Expanded(
-                flex: 3,
+                flex: 4,
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 3.w, vertical: 2.h),
                   child: Column(
@@ -71,10 +72,14 @@ class KhatmaWidget extends StatelessWidget {
                 ),
               ),
               Flexible(
-                flex: 2,
-                child: Image.asset(
-                  "assets/icons/quran.png",
-                  fit: BoxFit.cover,
+                flex: 3,
+                child: Container(
+                  transform: Matrix4.translationValues(-5.w, 4.h, 0),
+                  child: Image.asset(
+                    "assets/icons/quran.png",
+                    fit: BoxFit.cover,
+                    height: 300,
+                  ),
                 ),
               ),
             ],

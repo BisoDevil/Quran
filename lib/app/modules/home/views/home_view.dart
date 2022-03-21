@@ -1,4 +1,5 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
+import '../../../util/util_function.dart';
 import 'package:quran/app/modules/home/views/local_widget/option_widget.dart';
 import 'package:quran/app/modules/home/views/local_widget/qiblah_compass_widget.dart';
 import 'package:quran/app/routes/app_pages.dart';
@@ -19,7 +20,7 @@ class HomeView extends GetView<HomeController> {
             fit: BoxFit.cover,
           ),
           SafeArea(
-            child: Padding(
+            child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -52,18 +53,21 @@ class HomeView extends GetView<HomeController> {
                   ),
                   Obx(
                     () => Text(
-                      controller.nextAdhanTime.value <= 0
-                          ? ''
-                          : S
-                              .of(context)
-                              .inDurationM(controller.nextAdhanTime.value),
+                      S.of(context).inDurationM(
+                            controller.nextAdhanTime.value.formatDuration(),
+                          ),
                       style: Get.textTheme.headline6,
                     ),
                   ),
                   addVerticalSpace(1.5),
                   Row(
                     children: [
-                      Icon(Icons.pin_drop_outlined),
+                      SvgPicture.asset(
+                        "assets/icons/location.svg",
+                        height: 30,
+                        width: 30,
+                        color: Colors.black,
+                      ),
                       Obx(
                         () => Text(
                           controller.currentCity.value,
@@ -83,55 +87,62 @@ class HomeView extends GetView<HomeController> {
                         },
                       )),
                   addVerticalSpace(3),
-                  Expanded(
-                    child: GridView.count(
-                      crossAxisCount: 3,
-                      childAspectRatio: 1,
-                      children: [
-                        OptionWidget(
-                          title: S.of(context).quran,
-                          svgPath: "assets/icons/quran_book.svg",
-                          onPressed: () {
-                            Get.toNamed(Routes.QURAN_INDEX);
-                          },
-                        ),
-                        OptionWidget(
-                          title: S.of(context).azkarAlsabah,
-                          svgPath: "assets/icons/azkar.svg",
-                          onPressed: () {
-                            Get.toNamed(Routes.AZKAR, arguments: 'morning');
-                          },
-                        ),
-                        OptionWidget(
-                          title: S.of(context).azkarAlmasa,
-                          svgPath: "assets/icons/night.svg",
-                          onPressed: () {
-                            Get.toNamed(Routes.AZKAR, arguments: 'night');
-                          },
-                        ),
-                        OptionWidget(
-                          title: S.of(context).doaaFromSunna,
-                          svgPath: "assets/icons/open_book.svg",
-                          onPressed: () {
-                            Get.toNamed(Routes.DOAA);
-                          },
-                        ),
-                        OptionWidget(
-                          title: S.of(context).location,
-                          svgPath: "assets/icons/location.svg",
-                          onPressed: () {
-                            controller.launchMap();
-                          },
-                        ),
-                        OptionWidget(
-                          title: S.of(context).information,
-                          svgPath: "assets/icons/info.svg",
-                          onPressed: () {
-                            Get.toNamed(Routes.INFO);
-                          },
-                        ),
-                      ],
-                    ),
+                  GridView.count(
+                    crossAxisCount: 3,
+                    childAspectRatio: 1,
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    children: [
+                      OptionWidget(
+                        title: S.of(context).quran,
+                        svgPath: "assets/icons/quran_book.svg",
+                        onPressed: () {
+                          Get.toNamed(Routes.QURAN_INDEX);
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).azkarAlsabah,
+                        svgPath: "assets/icons/azkar.svg",
+                        onPressed: () {
+                          Get.toNamed(Routes.AZKAR, arguments: 'morning');
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).azkarAlmasa,
+                        svgPath: "assets/icons/night.svg",
+                        onPressed: () {
+                          Get.toNamed(Routes.AZKAR, arguments: 'night');
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).doaaFromSunna,
+                        svgPath: "assets/icons/open_book.svg",
+                        onPressed: () {
+                          Get.toNamed(Routes.DOAA);
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).prayerTime,
+                        svgPath: "assets/icons/adhan.svg",
+                        onPressed: () {
+                          controller.showAdhanBottomSheet();
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).location,
+                        svgPath: "assets/icons/location.svg",
+                        onPressed: () {
+                          controller.launchMap();
+                        },
+                      ),
+                      OptionWidget(
+                        title: S.of(context).information,
+                        svgPath: "assets/icons/info.svg",
+                        onPressed: () {
+                          Get.toNamed(Routes.INFO);
+                        },
+                      ),
+                    ],
                   )
                 ],
               ),

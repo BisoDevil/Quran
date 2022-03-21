@@ -15,5 +15,8 @@
   "lastReadInfo": "Last read {info}",
   "youreDone": "You're done!",
   "countAyat": "{count} Ayat",
-  "repeatTimes": "{repeat} times"
+  "repeatTimes": "{repeat} times",
+  "share": "Share",
+  "bookmark": "Bookmark",
+  "prayerTime": "Prayer time"
 }

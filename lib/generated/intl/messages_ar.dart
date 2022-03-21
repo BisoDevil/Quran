@@ -22,7 +22,7 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(count) => "${count} ايه";
 
-  static String m1(duration) => "خلال ${duration} د";
+  static String m1(duration) => "خلال ${duration}";
 
   static String m2(info) => "اخر قراءة ${info}";
 
@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "asr": MessageLookupByLibrary.simpleMessage("العصر"),
         "azkarAlmasa": MessageLookupByLibrary.simpleMessage("اذكار المساء"),
         "azkarAlsabah": MessageLookupByLibrary.simpleMessage("اذكار الصباح"),
+        "bookmark": MessageLookupByLibrary.simpleMessage("حفظ"),
         "countAyat": m0,
         "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),
         "doaaFromSunna": MessageLookupByLibrary.simpleMessage("ادعية من السنة"),
@@ -44,8 +45,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastReadInfo": m2,
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
+        "prayerTime": MessageLookupByLibrary.simpleMessage("اوقات الصلاه"),
         "quran": MessageLookupByLibrary.simpleMessage("القران"),
         "repeatTimes": m3,
+        "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
         "youreDone": MessageLookupByLibrary.simpleMessage("اكتمل يومك")
       };
 }

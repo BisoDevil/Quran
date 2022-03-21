@@ -19,15 +19,13 @@ dependencies:
   geolocator: ^8.2.0
   get: 4.6.1
   get_storage: ^2.0.3
-  
   map_launcher: ^2.2.1+1
+  share: ^2.0.4
   sizer: ^2.0.15
   supercharged: ^2.1.1
   visibility_detector: ^0.2.2
 
-
-
-dependency_overrides: 
+dependency_overrides:
   geolocator: ^8.2.0
 
 dev_dependencies:
@@ -51,6 +49,7 @@ flutter:
     - assets/images/
     - assets/icons/
     - assets/json/
+    - assets/surahs/
 
   fonts:
     - family: Arabic

@@ -1,5 +1,5 @@
 {
-  "inDurationM": "خلال {duration} د",
+  "inDurationM": "خلال {duration}",
   "quran": "القران",
   "azkarAlsabah": "اذكار الصباح",
   "azkarAlmasa": "اذكار المساء",
@@ -15,5 +15,8 @@
   "lastReadInfo": "اخر قراءة {info}",
   "youreDone": "اكتمل يومك",
   "countAyat": "{count} ايه",
-  "repeatTimes": "{repeat} مرات"
+  "repeatTimes": "{repeat} مرات",
+  "share": "مشاركة",
+  "bookmark": "حفظ",
+  "prayerTime": "اوقات الصلاه"
 }

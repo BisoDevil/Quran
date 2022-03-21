@@ -33,6 +33,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "asr": MessageLookupByLibrary.simpleMessage("Asr"),
         "azkarAlmasa": MessageLookupByLibrary.simpleMessage("Azkar Almasa"),
         "azkarAlsabah": MessageLookupByLibrary.simpleMessage("Azkar Alsabah"),
+        "bookmark": MessageLookupByLibrary.simpleMessage("Bookmark"),
         "countAyat": m0,
         "dhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),
         "doaaFromSunna":
@@ -45,8 +46,10 @@ class MessageLookup extends MessageLookupByLibrary {
         "lastReadInfo": m2,
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "maghrib": MessageLookupByLibrary.simpleMessage("Maghrib"),
+        "prayerTime": MessageLookupByLibrary.simpleMessage("Prayer time"),
         "quran": MessageLookupByLibrary.simpleMessage("Quran"),
         "repeatTimes": m3,
+        "share": MessageLookupByLibrary.simpleMessage("Share"),
         "youreDone": MessageLookupByLibrary.simpleMessage("You\'re done!")
       };
 }
