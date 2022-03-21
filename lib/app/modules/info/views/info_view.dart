@@ -13,7 +13,7 @@ class InfoView extends GetView<InfoController> {
         title: Text(S.of(context).information),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(10),
         child: HtmlWidget(
           '''
      <p dir="rtl" align="center"><span style="font-family: 'Arial Unicode MS';"><span lang="hi-IN"><u><span style="font-family: 'Traditional Arabic';"><span style="font-size: medium;"><strong>مسجد الجوزاء &ndash; لؤلؤة كورنيش الخبر</strong></span></span></u></span></span></p>
