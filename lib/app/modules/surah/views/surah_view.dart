@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:quran/app/modules/surah/views/local_widget/ayah_number_widget.dart';
 
 import 'package:quran/index.dart';
 
@@ -48,13 +49,15 @@ class SurahView extends GetView<SurahController> {
                         if (item.text.contains(
                             'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
                           return TextSpan(
-                              text:
-                                  " ${item.text.replaceFirst('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
-                              style: Get.textTheme.headline5!.copyWith(
-                                height: 2.6,
-                                fontFamily: "Quran",
-                              ));
+                            text:
+                                " ${item.text.replaceFirst('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
+                            style: Get.textTheme.headline5!.copyWith(
+                              height: 2.6,
+                              fontFamily: "Quran",
+                            ),
+                          );
                         }
+
                         return TextSpan(
                           text: " ${item.text} ",
                           recognizer: LongPressGestureRecognizer()
@@ -64,25 +67,8 @@ class SurahView extends GetView<SurahController> {
                             },
                           children: [
                             WidgetSpan(
-                              child: Stack(
-                                alignment: Alignment.center,
-                                key: GlobalObjectKey(item.number),
-                                children: [
-                                  SvgPicture.asset(
-                                    'assets/icons/aya_icon.svg',
-                                    height: 33,
-                                  ),
-                                  Text(
-                                    item.numberInSurah.toString(),
-                                    style: Get.textTheme.caption!.copyWith(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 9,
-                                      color: Colors.black,
-                                    ),
-                                    textAlign: TextAlign.center,
-                                  )
-                                ],
-                              ),
+                              child:
+                                  AyahNumberWidget(number: item.numberInSurah),
                               alignment: PlaceholderAlignment.bottom,
                             ),
                           ],

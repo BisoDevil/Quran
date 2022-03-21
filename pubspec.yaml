@@ -61,6 +61,7 @@ flutter:
     - family: Quran
       fonts:
         - asset: assets/fonts/me_quran.ttf
+    
 
 flutter_intl:
   enabled: true
