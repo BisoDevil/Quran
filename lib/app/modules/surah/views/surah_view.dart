@@ -59,13 +59,15 @@ class SurahView extends GetView<SurahController> {
                             if (item.text.contains(
                                 'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
                               return TextSpan(
-                                text:
-                                    " ${item.text.replaceFirst('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
-                                style: Get.textTheme.headline5!.copyWith(
-                                  height: 2.6,
-                                  fontFamily: "Quran",
-                                ),
-                              );
+                                  text:
+                                      " ${item.text.replaceFirst('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
+                                  children: [
+                                    WidgetSpan(
+                                      child: AyahNumberWidget(
+                                          number: item.numberInSurah),
+                                      alignment: PlaceholderAlignment.bottom,
+                                    ),
+                                  ]);
                             }
 
                             return TextSpan(
@@ -75,6 +77,11 @@ class SurahView extends GetView<SurahController> {
                                   controller.ayahAction(
                                       item, _.scrollController.offset);
                                 },
+                              style: TextStyle(
+                                backgroundColor: item.number == _.selectedAyah
+                                    ? Colors.grey[300]
+                                    : null,
+                              ),
                               children: [
                                 WidgetSpan(
                                   child: AyahNumberWidget(

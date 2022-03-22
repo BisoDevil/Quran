@@ -11,6 +11,7 @@ class SurahController extends GetxController {
   final ScrollController scrollController = ScrollController();
   Surah? surah;
   int lastRead = 0;
+  int selectedAyah = 0;
   var surahName = "".obs;
   @override
   void onInit() {
@@ -26,17 +27,22 @@ class SurahController extends GetxController {
     if (Get.arguments['fromKhatma']) {
       if (_box.hasData('khatma')) {
         double offset = _box.read('khatma')['offset'] ?? 0;
+        int _selected = _box.read('khatma')['percent'] ?? 0;
         WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
           scrollController.animateTo(offset,
               duration: Duration(milliseconds: 300), curve: Curves.ease);
+          selectedAyah = _selected;
+          update();
         });
       }
     }
   }
 
-  ayahAction(Ayah ayah, double offset) {
+  ayahAction(Ayah ayah, double offset) async {
+    selectedAyah = ayah.number;
+    update();
     // show dialog
-    Get.dialog(
+    await Get.dialog(
       ActionDialog(
         text: ayah.text,
         onBookmarkPressed: () async {
@@ -53,5 +59,7 @@ class SurahController extends GetxController {
         },
       ),
     );
+    selectedAyah = 0;
+    update();
   }
 }

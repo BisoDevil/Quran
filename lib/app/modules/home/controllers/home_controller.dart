@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:get_storage/get_storage.dart';
@@ -26,7 +28,7 @@ class HomeController extends GetxController {
   void onInit() {
     _getCurrentCity();
     getData();
-    _getNextPrayerTime();
+
     super.onInit();
   }
 
@@ -41,6 +43,11 @@ class HomeController extends GetxController {
     }
     var pos = await Geolocator.getCurrentPosition();
 
+    //,
+    adhanTime = await _adhanTimeProvider.getAdhanTime(
+        pos.latitude, pos.longitude, DateTime.now());
+    _nextAdhan = await _adhanTimeProvider.getAdhanTime(
+        pos.latitude, pos.longitude, DateTime.now().add(Duration(days: 1)));
     List<Placemark> placemarks = await placemarkFromCoordinates(
       pos.latitude,
       pos.longitude,
@@ -48,6 +55,7 @@ class HomeController extends GetxController {
     );
 
     currentCity.value = placemarks.first.administrativeArea ?? '';
+    _startCounter();
   }
 
   getData() {
@@ -70,15 +78,7 @@ class HomeController extends GetxController {
     );
   }
 
-  _getNextPrayerTime() async {
-    var pos = await Geolocator.getLastKnownPosition();
-    double lat = pos?.latitude ?? 26.30415281489869;
-    double long = pos?.longitude ?? 50.22714383787001;
-
-    //,
-    adhanTime =
-        await _adhanTimeProvider.getAdhanTime(lat, long, DateTime.now());
-
+  _getNextPrayerTime() {
     var _now = DateTime.now();
     if (adhanTime!.fajr.isAfter(_now)) {
       nextAdhanTime.value = adhanTime!.fajr.difference(_now);
@@ -96,8 +96,6 @@ class HomeController extends GetxController {
       nextAdhanTime.value = adhanTime!.isha.difference(_now);
       nextAdhan.value = S.current.isha;
     } else {
-      _nextAdhan = await _adhanTimeProvider.getAdhanTime(
-          lat, long, DateTime.now().add(Duration(days: 1)));
       nextAdhanTime.value =
           _nextAdhan!.fajr.add(Duration(days: 1)).difference(_now);
 
@@ -105,6 +103,12 @@ class HomeController extends GetxController {
     }
 
     update();
+  }
+
+  _startCounter() {
+    Timer.periodic(Duration(seconds: 1), (t) {
+      _getNextPrayerTime();
+    });
   }
 
   launchMap() async {

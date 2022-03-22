@@ -18,6 +18,7 @@ extension FormatDuration on Duration {
     if (tokens.isNotEmpty || minutes != 0) {
       tokens.add('$minutes د');
     }
+    // tokens.add('$seconds s');
 
     return tokens.join(' : ');
   }

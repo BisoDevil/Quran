@@ -119,8 +119,8 @@ class QiblahCompassWidget extends StatelessWidget {
             ),
             Image.asset(
               'assets/icons/qibla.png',
-              height: 26,
-              width: 26,
+              height: 30,
+              width: 30,
             ),
           ],
         );
