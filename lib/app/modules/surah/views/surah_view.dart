@@ -93,8 +93,9 @@ class SurahView extends GetView<SurahController> {
                     TextSpan(
                       children: [
                         for (var item in _.surah!.ayahs!)
-                          item.text.contains(
-                                  'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')
+                          (item.numberInSurah == 1 &&
+                                  item.text.contains(
+                                      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'))
                               ? TextSpan(children: [
                                   WidgetSpan(
                                     child: WidgetSpanWrapper(
