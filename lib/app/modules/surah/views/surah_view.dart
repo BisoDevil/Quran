@@ -95,20 +95,37 @@ class SurahView extends GetView<SurahController> {
                         for (var item in _.surah!.ayahs!)
                           item.text.contains(
                                   'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')
-                              ? WidgetSpan(
-                                  child: WidgetSpanWrapper(
-                                    key: nextKey(),
-                                    child: Center(
-                                      child: Text(
-                                        "g",
-                                        style: TextStyle(
-                                          fontSize: 50,
-                                          fontFamily: "Besmellah",
+                              ? TextSpan(children: [
+                                  WidgetSpan(
+                                    child: WidgetSpanWrapper(
+                                      key: nextKey(),
+                                      child: Center(
+                                        child: Text(
+                                          "g",
+                                          style: TextStyle(
+                                            fontSize: 50,
+                                            fontFamily: "Besmellah",
+                                          ),
                                         ),
                                       ),
                                     ),
                                   ),
-                                )
+                                  TextSpan(
+                                      text:
+                                          " ${item.text.replaceAll('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
+                                      children: [
+                                        WidgetSpan(
+                                          alignment:
+                                              PlaceholderAlignment.bottom,
+                                          child: WidgetSpanWrapper(
+                                            key: nextKey(),
+                                            child: AyahNumberWidget(
+                                              number: item.numberInSurah,
+                                            ),
+                                          ),
+                                        ),
+                                      ])
+                                ])
                               : TextSpan(
                                   text: " ${item.text} ",
                                   recognizer: LongPressGestureRecognizer()
