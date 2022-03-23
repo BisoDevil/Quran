@@ -1,5 +1,5 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
-import '../../../util/util_function.dart';
+
 import 'package:quran/app/modules/home/views/local_widget/option_widget.dart';
 import 'package:quran/app/modules/home/views/local_widget/qiblah_compass_widget.dart';
 import 'package:quran/app/routes/app_pages.dart';
@@ -53,9 +53,7 @@ class HomeView extends GetView<HomeController> {
                   ),
                   Obx(
                     () => Text(
-                      S.of(context).inDurationM(
-                            controller.nextAdhanTime.value.formatDuration(),
-                          ),
+                      controller.nextAdhanText.value,
                       style: Get.textTheme.headline6,
                     ),
                   ),

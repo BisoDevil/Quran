@@ -18,5 +18,6 @@
   "repeatTimes": "{repeat} times",
   "share": "Share",
   "bookmark": "Bookmark",
-  "prayerTime": "Prayer time"
+  "prayerTime": "Prayer time",
+  "fromDuration": "from {duration}"
 }

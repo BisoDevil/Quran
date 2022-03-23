@@ -22,11 +22,13 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(count) => "${count} ايه";
 
-  static String m1(duration) => "خلال ${duration}";
+  static String m1(duration) => "منذ ${duration}";
 
-  static String m2(info) => "اخر قراءة ${info}";
+  static String m2(duration) => "خلال ${duration}";
 
-  static String m3(repeat) => "${repeat} مرات";
+  static String m3(info) => "اخر قراءة ${info}";
+
+  static String m4(repeat) => "${repeat} مرات";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -38,16 +40,17 @@ class MessageLookup extends MessageLookupByLibrary {
         "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),
         "doaaFromSunna": MessageLookupByLibrary.simpleMessage("ادعية من السنة"),
         "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
-        "inDurationM": m1,
+        "fromDuration": m1,
+        "inDurationM": m2,
         "information": MessageLookupByLibrary.simpleMessage("معلومات"),
         "isha": MessageLookupByLibrary.simpleMessage("العشاء"),
         "khatma": MessageLookupByLibrary.simpleMessage("الختمة"),
-        "lastReadInfo": m2,
+        "lastReadInfo": m3,
         "location": MessageLookupByLibrary.simpleMessage("الموقع"),
         "maghrib": MessageLookupByLibrary.simpleMessage("المغرب"),
         "prayerTime": MessageLookupByLibrary.simpleMessage("اوقات الصلاه"),
         "quran": MessageLookupByLibrary.simpleMessage("القران"),
-        "repeatTimes": m3,
+        "repeatTimes": m4,
         "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
         "youreDone": MessageLookupByLibrary.simpleMessage("اكتمل يومك")
       };

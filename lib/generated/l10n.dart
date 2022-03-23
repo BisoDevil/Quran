@@ -249,6 +249,16 @@ class S {
       args: [],
     );
   }
+
+  /// `from {duration}`
+  String fromDuration(Object duration) {
+    return Intl.message(
+      'from $duration',
+      name: 'fromDuration',
+      desc: '',
+      args: [duration],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

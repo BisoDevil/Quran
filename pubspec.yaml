@@ -61,6 +61,13 @@ flutter:
     - family: Quran
       fonts:
         - asset: assets/fonts/me_quran.ttf
+
+    - family: Besmellah
+      fonts:
+        - asset: assets/fonts/besmellah.ttf
+
+    
+    
     
 
 flutter_intl:

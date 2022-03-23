@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:map_launcher/map_launcher.dart';
 import 'package:quran/app/data/models/adhan_time_model.dart';
 import 'package:quran/app/data/providers/adhan_time_provider.dart';
+import 'package:quran/app/util/util_function.dart';
 
 import '../../../../index.dart';
 import '../views/local_widget/adhan_model_sheet.dart';
@@ -14,7 +15,8 @@ import '../views/local_widget/adhan_model_sheet.dart';
 class HomeController extends GetxController {
   var currentCity = "".obs;
   var nextAdhan = "".obs;
-  var nextAdhanTime = Duration().obs;
+  late Duration nextAdhanTime;
+  var nextAdhanText = "".obs;
   var surahNo = 1.obs;
   var info = "".obs;
   var percent = 0.0.obs;
@@ -43,7 +45,6 @@ class HomeController extends GetxController {
     }
     var pos = await Geolocator.getCurrentPosition();
 
-    //,
     adhanTime = await _adhanTimeProvider.getAdhanTime(
         pos.latitude, pos.longitude, DateTime.now());
     _nextAdhan = await _adhanTimeProvider.getAdhanTime(
@@ -53,7 +54,7 @@ class HomeController extends GetxController {
       pos.longitude,
       localeIdentifier: Get.locale?.languageCode,
     );
-
+    _getNextPrayerTime();
     currentCity.value = placemarks.first.administrativeArea ?? '';
     _startCounter();
   }
@@ -80,25 +81,89 @@ class HomeController extends GetxController {
 
   _getNextPrayerTime() {
     var _now = DateTime.now();
-    if (adhanTime!.fajr.isAfter(_now)) {
-      nextAdhanTime.value = adhanTime!.fajr.difference(_now);
-      nextAdhan.value = S.current.fajr;
-    } else if (adhanTime!.dhuhr.isAfter(_now)) {
-      nextAdhanTime.value = adhanTime!.dhuhr.difference(_now);
-      nextAdhan.value = S.current.dhuhr;
-    } else if (adhanTime!.asr.isAfter(_now)) {
-      nextAdhanTime.value = adhanTime!.asr.difference(_now);
-      nextAdhan.value = S.current.asr;
-    } else if (adhanTime!.maghrib.isAfter(_now)) {
-      nextAdhanTime.value = adhanTime!.maghrib.difference(_now);
-      nextAdhan.value = S.current.maghrib;
-    } else if (adhanTime!.isha.isAfter(_now)) {
-      nextAdhanTime.value = adhanTime!.isha.difference(_now);
-      nextAdhan.value = S.current.isha;
-    } else {
-      nextAdhanTime.value =
-          _nextAdhan!.fajr.add(Duration(days: 1)).difference(_now);
 
+    /// Check Fajr
+    if (adhanTime!.fajr.isAfter(_now)) {
+      nextAdhanTime = adhanTime!.fajr.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.fajr;
+    } else if (adhanTime!.fajr.isBefore(_now) &&
+        _now.difference(adhanTime!.fajr).inMinutes < 90) {
+      nextAdhanTime = _now.difference(adhanTime!.fajr);
+
+      nextAdhanText.value = S.current.fromDuration(
+        nextAdhanTime.formatDuration(),
+      );
+      nextAdhan.value = S.current.fajr;
+    }
+
+    /// Check Dhur
+    else if (adhanTime!.dhuhr.isAfter(_now) &&
+        _now.difference(adhanTime!.fajr).inMinutes > 90) {
+      nextAdhanTime = adhanTime!.dhuhr.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.dhuhr;
+    } else if (adhanTime!.dhuhr.isBefore(_now) &&
+        _now.difference(adhanTime!.dhuhr).inMinutes < 30) {
+      nextAdhanTime = adhanTime!.dhuhr.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.dhuhr;
+    }
+
+    /// Check asr
+
+    else if (adhanTime!.asr.isAfter(_now) &&
+        _now.difference(adhanTime!.dhuhr).inMinutes > 30) {
+      nextAdhanTime = adhanTime!.asr.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.asr;
+    } else if (adhanTime!.asr.isBefore(_now) &&
+        _now.difference(adhanTime!.asr).inMinutes < 30) {
+      nextAdhanTime = adhanTime!.asr.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.asr;
+    }
+
+    /// Check Maghrib
+    else if (adhanTime!.maghrib.isAfter(_now) &&
+        _now.difference(adhanTime!.asr).inMinutes > 30) {
+      nextAdhanTime = adhanTime!.maghrib.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.maghrib;
+    } else if (adhanTime!.asr.isBefore(_now) &&
+        _now.difference(adhanTime!.maghrib).inMinutes < 30) {
+      nextAdhanTime = adhanTime!.maghrib.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.maghrib;
+    }
+
+    /// Check Isha
+    else if (adhanTime!.isha.isAfter(_now) &&
+        _now.difference(adhanTime!.maghrib).inMinutes > 30) {
+      nextAdhanTime = adhanTime!.isha.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.isha;
+    } else if (adhanTime!.isha.isBefore(_now) &&
+        _now.difference(adhanTime!.isha).inMinutes < 60) {
+      nextAdhanTime = adhanTime!.isha.difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
+      nextAdhan.value = S.current.isha;
+    }
+
+    /// Check Next Day
+    else {
+      nextAdhanTime = _nextAdhan!.fajr.add(Duration(days: 1)).difference(_now);
+      nextAdhanText.value =
+          S.current.inDurationM(nextAdhanTime.formatDuration());
       nextAdhan.value = S.current.fajr;
     }
 
@@ -106,7 +171,7 @@ class HomeController extends GetxController {
   }
 
   _startCounter() {
-    Timer.periodic(Duration(seconds: 1), (t) {
+    Timer.periodic(Duration(minutes: 1), (t) {
       _getNextPrayerTime();
     });
   }

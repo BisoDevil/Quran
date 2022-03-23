@@ -18,5 +18,6 @@
   "repeatTimes": "{repeat} مرات",
   "share": "مشاركة",
   "bookmark": "حفظ",
-  "prayerTime": "اوقات الصلاه"
+  "prayerTime": "اوقات الصلاه",
+  "fromDuration": "منذ {duration}"
 }

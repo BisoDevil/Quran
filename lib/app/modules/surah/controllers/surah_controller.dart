@@ -13,6 +13,7 @@ class SurahController extends GetxController {
   int lastRead = 0;
   int selectedAyah = 0;
   var surahName = "".obs;
+
   @override
   void onInit() {
     _getAyahs();
@@ -21,7 +22,9 @@ class SurahController extends GetxController {
 
   _getAyahs() async {
     surah = await _surahProvider.getSurah(Get.arguments['surah']);
+
     surahName.value = surah!.name;
+
     update();
 
     if (Get.arguments['fromKhatma']) {
