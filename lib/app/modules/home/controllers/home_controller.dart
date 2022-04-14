@@ -61,11 +61,10 @@ class HomeController extends GetxController {
 
   getData() {
     if (_box.hasData("khatma")) {
-      var _data = _box.read("khatma");
-      info.value = _data['surah'] ?? '';
-      surahNo.value = _data['surahNo'] ?? 1;
-      print(_data['percent']);
-      percent.value = (_data['percent'] ?? 0) / 6200;
+      info.value = _box.read('surahName') ?? '';
+      surahNo.value = _box.read("khatma") ?? 0;
+
+      percent.value = (_box.read("khatma") ?? 0) / 605;
       update();
     }
   }

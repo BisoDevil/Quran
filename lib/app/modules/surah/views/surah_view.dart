@@ -1,231 +1,90 @@
-import 'package:flutter/gestures.dart';
-import 'package:flutter/scheduler.dart';
-import 'package:quran/app/modules/surah/views/local_widget/aya_number_widget.dart';
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:quran/app/global/controller/dimension.dart';
+import 'package:quran/app/util/constants.dart';
 
+import 'package:quran/app/util/image_painter.dart';
 import 'package:quran/index.dart';
 
+import '../../../util/util_function.dart';
 import '../controllers/surah_controller.dart';
 
 class SurahView extends GetView<SurahController> {
-  double getYOffsetOf(GlobalKey key) {
-    RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
-    return box.localToGlobal(Offset.zero).dy;
-  }
-
-  double getXOffsetOf(GlobalKey key) {
-    RenderBox box = key.currentContext!.findRenderObject() as RenderBox;
-    return box.localToGlobal(Offset.zero).dx;
-  }
-
-  void resolveSameRow(List<GlobalKey<WidgetSpanWrapperState>> keys) {
-    var middle = (keys.length / 2.0).floor();
-    for (int i = 0; i < middle; i++) {
-      var a = keys[i];
-      var b = keys[keys.length - i - 1];
-      var left = getXOffsetOf(a);
-      var right = getXOffsetOf(b);
-      a.currentState!.updateXOffset(right - left);
-      b.currentState!.updateXOffset(left - right);
-    }
-  }
-
-  final keys = <GlobalKey<WidgetSpanWrapperState>>[];
-  nextKey() {
-    var key = GlobalKey<WidgetSpanWrapperState>();
-    keys.add(key);
-    return key;
-  }
-
   @override
   Widget build(BuildContext context) {
-    keys.clear();
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
-      Future.delayed(Duration(milliseconds: 20), () {
-        if (keys.isNotEmpty) {
-          List<GlobalKey<WidgetSpanWrapperState>>? sameRow;
-          GlobalKey<WidgetSpanWrapperState> prev = keys.removeAt(0);
-          for (var key in keys) {
-            if (getYOffsetOf(key) == getYOffsetOf(prev)) {
-              sameRow ??= [prev];
-
-              sameRow.add(key);
-            } else if (sameRow != null) {
-              resolveSameRow(sameRow);
-              sameRow = null;
-            }
-            prev = key;
-          }
-          if (sameRow != null) {
-            resolveSameRow(sameRow);
-          }
-        }
-      });
-    });
-
-    return Scaffold(
-      backgroundColor: Colors.amber[50],
-      body: CustomScrollView(
-        controller: controller.scrollController,
-        slivers: [
-          SliverAppBar(
-            title: Obx(
-              () => Text(
-                controller.surahName.value,
+    var loc = Get.find<Dimension>();
+    loc.setScreenDimension(context);
+    return GetBuilder<SurahController>(builder: (_) {
+      return Scaffold(
+        backgroundColor: Colors.grey[50],
+        appBar: AppBar(
+          title: Row(
+            children: [
+              Image.asset(
+                'assets/surahs/sname_${controller.currentAya.sura}.png',
+                height: kToolbarHeight * .7,
+                color: Constants.tintColor,
               ),
-            ),
-            backgroundColor: Colors.amber[100],
-            floating: true,
+              Spacer(),
+              Image.asset(
+                'assets/images/juz.png',
+                height: kToolbarHeight * .45,
+                color: Constants.tintColor,
+              ),
+              Text(
+                " ${getVerseEndSymbol(_.currentAya.juz)} ",
+                style: TextStyle(
+                  color: Constants.tintColor,
+                ),
+              ),
+              Image.asset(
+                'assets/images/hezb.png',
+                height: kToolbarHeight * .45,
+                color: Constants.tintColor,
+              ),
+              Text(
+                " ${getVerseEndSymbol(_.currentAya.hezb)} ",
+                style: TextStyle(
+                  color: Constants.tintColor,
+                ),
+              ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: GetBuilder<SurahController>(
-              builder: (_) {
-                if (_.surah == null) {
-                  return Center(
-                    child: CircularProgressIndicator(
+        ),
+        body: Container(
+          height: loc.quranScaledHeight,
+          child: PageView.builder(
+            itemCount: 605,
+            controller: _.pageController,
+            onPageChanged: _.onPageChanged,
+            physics: BouncingScrollPhysics(),
+            itemBuilder: (context, index) {
+              return CustomPaint(
+                painter: ImagePainter(
+                  endAyaX: _.ayaPaintPoints['endAyaX'] ?? 0,
+                  endAyaY: _.ayaPaintPoints['endAyaY'] ?? 0,
+                  prevAyaX: _.ayaPaintPoints['prevAyaX'] ?? 0,
+                  prevAyaY: _.ayaPaintPoints['prevAyaY'] ?? 0,
+                ),
+                child: GestureDetector(
+                  onLongPressEnd: (details) {
+                    _.getAyaPaintPoints(
+                        details.localPosition.dx, details.localPosition.dy);
+                  },
+                  child: CachedNetworkImage(
+                    imageUrl:
+                        "https://hquran.net/quran/hafs/imagesv2/$index.png",
+                    placeholder: (context, url) => Center(
+                        child: CircularProgressIndicator(
                       strokeWidth: 1,
-                    ),
-                  );
-                }
-
-                return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Text.rich(
-                    TextSpan(
-                      children: [
-                        for (var item in _.surah!.ayahs!)
-                          (item.numberInSurah == 1 &&
-                                  item.text.contains(
-                                      'بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ'))
-                              ? TextSpan(children: [
-                                  WidgetSpan(
-                                    child: WidgetSpanWrapper(
-                                      key: nextKey(),
-                                      child: Center(
-                                        child: Text(
-                                          "g",
-                                          style: TextStyle(
-                                            fontSize: 50,
-                                            fontFamily: "Besmellah",
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  TextSpan(
-                                      text:
-                                          " ${item.text.replaceAll('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
-                                      children: [
-                                        WidgetSpan(
-                                          alignment:
-                                              PlaceholderAlignment.bottom,
-                                          child: WidgetSpanWrapper(
-                                            key: nextKey(),
-                                            child: AyahNumberWidget(
-                                              number: item.numberInSurah,
-                                            ),
-                                          ),
-                                        ),
-                                      ])
-                                ])
-                              : TextSpan(
-                                  text: " ${item.text} ",
-                                  recognizer: LongPressGestureRecognizer()
-                                    ..onLongPress = () {
-                                      controller.ayahAction(
-                                          item, _.scrollController.offset);
-                                    },
-                                  style: TextStyle(
-                                    backgroundColor:
-                                        item.number == _.selectedAyah
-                                            ? Colors.grey[300]
-                                            : null,
-                                  ),
-                                  children: [
-                                    WidgetSpan(
-                                      alignment: PlaceholderAlignment.bottom,
-                                      child: WidgetSpanWrapper(
-                                        key: nextKey(),
-                                        child: AyahNumberWidget(
-                                          number: item.numberInSurah,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                )
-                      ],
-                    ),
-                    softWrap: true,
-                    textDirection: TextDirection.rtl,
-                    textAlign: TextAlign.justify,
-                    style: Get.textTheme.headline6?.copyWith(
-                      height: 2.6,
-                      fontWeight: FontWeight.normal,
-                      fontFamily: "Quran",
-                    ),
+                    )),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
                   ),
-                );
-                // return RichText(
-                //   text: TextSpan(
-                //     text: "",
-                //     style: Get.textTheme.headline6!.copyWith(
-                //       height: 2.6,
-                //       fontWeight: FontWeight.normal,
-                //       fontFamily: "Quran",
-                //     ),
-                //     children: _.surah!.ayahs!.map((item) {
-                //       if (item.text
-                //           .contains('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ')) {
-                //         return TextSpan(
-                //             text:
-                //                 " ${item.text.replaceFirst('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', '')} ",
-                //             children: [
-                //               TextSpan(
-                //                 text: getVerseEndSymbol(item.numberInSurah),
-                //                 style: TextStyle(
-                //                   fontFamily: DefaultTextStyle.of(context)
-                //                       .style
-                //                       .fontFamily,
-                //                   fontSize: 27,
-                //                   color: Get.theme.colorScheme.primary,
-                //                 ),
-                //               ),
-                //             ]);
-                //       }
-
-                //       return TextSpan(
-                //         text: " ${item.text} ",
-                //         recognizer: LongPressGestureRecognizer()
-                //           ..onLongPress = () {
-                //             controller.ayahAction(
-                //                 item, _.scrollController.offset);
-                //           },
-                //         style: TextStyle(
-                //           backgroundColor: item.number == _.selectedAyah
-                //               ? Colors.grey[300]
-                //               : null,
-                //         ),
-                //         children: [
-                //           TextSpan(
-                //             text: getVerseEndSymbol(item.numberInSurah),
-                //             style: TextStyle(
-                //               fontFamily:
-                //                   DefaultTextStyle.of(context).style.fontFamily,
-                //               fontSize: 27,
-                //               color: Get.theme.colorScheme.primary,
-                //             ),
-                //           ),
-                //         ],
-                //       );
-                //     }).toList(),
-                //   ),
-                //   textAlign: TextAlign.justify,
-                //   textDirection: TextDirection.rtl,
-                // );
-              },
-            ),
-          )
-        ],
-      ),
-    );
+                ),
+              );
+            },
+          ),
+        ),
+      );
+    });
   }
 }

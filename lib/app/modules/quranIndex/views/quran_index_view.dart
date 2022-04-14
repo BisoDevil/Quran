@@ -1,6 +1,7 @@
 import 'package:quran/app/global/widget/khatma_widget.dart';
 import 'package:quran/app/modules/home/controllers/home_controller.dart';
 import 'package:quran/app/routes/app_pages.dart';
+import 'package:quran/app/util/util_function.dart';
 
 import '../../../../index.dart';
 import '../controllers/quran_index_controller.dart';
@@ -84,14 +85,15 @@ class QuranIndexView extends GetView<QuranIndexController> {
                               height: 38,
                             ),
                             subtitle: Text(
-                              S.of(context).countAyat(item.numberOfAyahs),
+                              S.of(context).countAyat(
+                                  getVerseEndSymbol(item.numberOfAyahs)),
                               style: Get.textTheme.subtitle2?.copyWith(
                                 color: Get.theme.colorScheme.primary,
                               ),
                             ),
                             leading: Container(
                               child: Text(
-                                "${item.number}.",
+                                "${getVerseEndSymbol(item.number)}.",
                                 style: Get.textTheme.headline6?.copyWith(
                                   color: Get.theme.colorScheme.primary,
                                 ),

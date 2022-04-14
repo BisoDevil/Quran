@@ -1,4 +1,7 @@
 import 'package:get_storage/get_storage.dart';
+import 'package:quran/app/data/providers/surah_provider.dart';
+import 'package:quran/app/global/controller/dimension.dart';
+
 import 'package:quran/app/theme/light_theme.dart';
 import 'app/routes/app_pages.dart';
 import 'index.dart';
@@ -13,6 +16,10 @@ Future<void> main() async {
         defaultTransition: Transition.cupertino,
         theme: lightTheme,
         locale: Locale('ar'),
+        onInit: () {
+          Get.put(SurahProvider());
+          Get.put(Dimension());
+        },
         localizationsDelegates: [
           S.delegate,
           GlobalCupertinoLocalizations.delegate,

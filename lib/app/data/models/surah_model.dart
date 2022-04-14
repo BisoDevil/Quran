@@ -6,7 +6,6 @@ class Surah {
     required this.englishNameTranslation,
     required this.revelationType,
     required this.numberOfAyahs,
-    this.ayahs,
   });
 
   final int number;
@@ -15,41 +14,13 @@ class Surah {
   final String englishNameTranslation;
   final String revelationType;
   final int numberOfAyahs;
-  final List<Ayah>? ayahs;
 
   factory Surah.fromJson(Map<String, dynamic> json) => Surah(
-        number: json["number"],
+        number: json["id"],
         name: json["name"],
-        englishName: json["englishName"],
-        englishNameTranslation: json["englishNameTranslation"],
-        revelationType: json["revelationType"],
-        numberOfAyahs: json["numberOfAyahs"],
-        ayahs: json["ayahs"] == null
-            ? []
-            : List<Ayah>.from(json["ayahs"].map((x) => Ayah.fromJson(x))),
+        englishName: json["tname"],
+        englishNameTranslation: json["ename"],
+        revelationType: json["type"],
+        numberOfAyahs: json["ayas"],
       );
-}
-
-class Ayah {
-  Ayah({
-    required this.number,
-    required this.text,
-    required this.numberInSurah,
-  });
-
-  final int number;
-  final String text;
-  final int numberInSurah;
-
-  factory Ayah.fromJson(Map<String, dynamic> json) => Ayah(
-        number: json["number"],
-        text: json["text"],
-        numberInSurah: json["numberInSurah"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "number": number,
-        "text": text,
-        "numberInSurah": numberInSurah,
-      };
 }
