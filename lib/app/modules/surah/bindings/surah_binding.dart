@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:quran/app/data/providers/surah_provider.dart';
-import 'package:quran/app/modules/surah/views/local_widget/action_dialog.dart';
 
 import '../../../global/controller/dimension.dart';
 import '../controllers/surah_controller.dart';
+import '../views/local_widget/popup_dialog.dart';
 
 class SurahBinding extends Bindings {
   @override
@@ -15,7 +15,7 @@ class SurahBinding extends Bindings {
       () => SurahProvider(),
     );
     Get.lazyPut<GetStorage>(
-      () => GetStorage(),
+      () => GetStorage("jawza"),
     );
     Get.lazyPut<SurahController>(
       () => SurahController(),

@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dhuhr": MessageLookupByLibrary.simpleMessage("Dhuhr"),
         "doaaFromSunna":
             MessageLookupByLibrary.simpleMessage("Doaa from sunna"),
+        "explaination": MessageLookupByLibrary.simpleMessage("Explaination"),
         "fajr": MessageLookupByLibrary.simpleMessage("Fajr"),
         "fromDuration": m1,
         "inDurationM": m2,

@@ -39,6 +39,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "countAyat": m0,
         "dhuhr": MessageLookupByLibrary.simpleMessage("الظهر"),
         "doaaFromSunna": MessageLookupByLibrary.simpleMessage("ادعية من السنة"),
+        "explaination": MessageLookupByLibrary.simpleMessage("تفسير"),
         "fajr": MessageLookupByLibrary.simpleMessage("الفجر"),
         "fromDuration": m1,
         "inDurationM": m2,

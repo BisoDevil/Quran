@@ -3,8 +3,8 @@ import 'package:quran/app/data/models/aya_model.dart';
 
 import 'package:quran/app/data/providers/surah_provider.dart';
 import 'package:quran/app/global/controller/dimension.dart';
+import 'package:quran/app/modules/surah/views/local_widget/popup_dialog.dart';
 
-import 'package:quran/app/modules/surah/views/local_widget/action_dialog.dart';
 import 'package:quran/index.dart';
 
 class SurahController extends GetxController {

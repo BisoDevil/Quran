@@ -19,5 +19,6 @@
   "share": "مشاركة",
   "bookmark": "حفظ",
   "prayerTime": "اوقات الصلاه",
-  "fromDuration": "منذ {duration}"
+  "fromDuration": "منذ {duration}",
+  "explaination": "تفسير"
 }

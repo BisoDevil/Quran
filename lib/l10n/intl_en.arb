@@ -19,5 +19,6 @@
   "share": "Share",
   "bookmark": "Bookmark",
   "prayerTime": "Prayer time",
-  "fromDuration": "from {duration}"
+  "fromDuration": "from {duration}",
+  "explaination": "Explaination"
 }

@@ -1,6 +1,7 @@
 import 'package:get_storage/get_storage.dart';
 import 'package:quran/app/modules/home/controllers/home_controller.dart';
 import 'package:quran/app/modules/surah/controllers/surah_controller.dart';
+import 'package:quran/app/modules/surah/views/local_widget/tafseer_bottom_sheet.dart';
 import 'package:share/share.dart';
 
 import '../../../../../index.dart';
@@ -139,7 +140,7 @@ class PopupMenu {
                       duration: Duration(milliseconds: 500),
                       opacity: _op,
                       child: Container(
-                        width: 40.w,
+                        width: 45.w,
                         height: itemHeight,
                         decoration: BoxDecoration(
                           color: Colors.black87,
@@ -148,77 +149,102 @@ class PopupMenu {
                         child: Column(
                           children: <Widget>[
                             ClipRRect(
-                                borderRadius: BorderRadius.circular(10.0),
-                                child: Container(
-                                  width: 35.w,
-                                  height: itemHeight,
-                                  decoration: BoxDecoration(
-                                      color: Colors.transparent,
-                                      borderRadius:
-                                          BorderRadius.circular(10.0)),
-                                  child: Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () async {
-                                          dismiss();
-                                          final GetStorage _box =
-                                              Get.find<GetStorage>();
-                                          await _box.write(
-                                              "khatma",
-                                              Get.find<SurahController>()
-                                                  .currentAya
-                                                  .page);
-                                          await _box.write(
-                                              "surahName",
-                                              Get.find<SurahController>()
-                                                  .currentAya
-                                                  .surahName);
-                                          Get.find<HomeController>().getData();
-                                        },
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.bookmark_add_outlined),
-                                            Text(
-                                              S.of(context).bookmark,
-                                              style: Get.textTheme.caption!
-                                                  .copyWith(
-                                                color: Get
-                                                    .theme.colorScheme.primary,
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Container(
+                                width: 40.w,
+                                height: itemHeight,
+                                decoration: BoxDecoration(
+                                    color: Colors.transparent,
+                                    borderRadius: BorderRadius.circular(10.0)),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceAround,
+                                  children: [
+                                    GestureDetector(
+                                      onTap: () async {
+                                        dismiss();
+                                        final GetStorage _box =
+                                            Get.find<GetStorage>();
+                                        await _box.write(
+                                            "khatma",
+                                            Get.find<SurahController>()
+                                                .currentAya
+                                                .page);
+                                        await _box.write(
+                                            "surahName",
+                                            Get.find<SurahController>()
+                                                .currentAya
+                                                .surahName);
+                                        Get.find<HomeController>().getData();
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.bookmark_add_outlined),
+                                          Text(
+                                            S.of(context).bookmark,
+                                            style:
+                                                Get.textTheme.caption!.copyWith(
+                                              color:
+                                                  Get.theme.colorScheme.primary,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                      GestureDetector(
-                                        onTap: () async {
-                                          var text = Get.find<SurahController>()
-                                              .currentAya
-                                              .text;
-                                          await Share.share(text);
-                                        },
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Icon(Icons.share),
-                                            Text(
-                                              S.of(context).share,
-                                              style: Get.textTheme.caption!
-                                                  .copyWith(
-                                                color: Get
-                                                    .theme.colorScheme.primary,
-                                              ),
-                                            )
-                                          ],
-                                        ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        var text = Get.find<SurahController>()
+                                            .currentAya
+                                            .text;
+                                        await Share.share(text);
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.share),
+                                          Text(
+                                            S.of(context).share,
+                                            style:
+                                                Get.textTheme.caption!.copyWith(
+                                              color:
+                                                  Get.theme.colorScheme.primary,
+                                            ),
+                                          )
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                )),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () async {
+                                        var text = Get.find<SurahController>()
+                                            .currentAya
+                                            .tafseer;
+                                        Get.bottomSheet(TafseerBottomSheet(
+                                          text: text,
+                                        ));
+                                      },
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Icon(Icons.inbox_rounded),
+                                          Text(
+                                            S.of(context).explaination,
+                                            style:
+                                                Get.textTheme.caption!.copyWith(
+                                              color:
+                                                  Get.theme.colorScheme.primary,
+                                            ),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ].reversed.toList(),
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ),
