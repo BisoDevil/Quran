@@ -19,6 +19,7 @@ class SurahController extends GetxController {
   Map<String, int> ayaPaintPoints = {};
   bool foundAya = false;
   late AyaModel currentAya;
+  int index = 1;
 
   @override
   void onInit() {
@@ -33,7 +34,6 @@ class SurahController extends GetxController {
   }
 
   _getAyahs() async {
-    late int index;
     bool fromKhatma = Get.arguments['fromKhatma'];
 
     if (fromKhatma) {

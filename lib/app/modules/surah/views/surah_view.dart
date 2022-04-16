@@ -50,39 +50,60 @@ class SurahView extends GetView<SurahController> {
             ],
           ),
         ),
-        body: Container(
-          height: loc.quranScaledHeight,
-          child: PageView.builder(
-            itemCount: 605,
-            controller: _.pageController,
-            onPageChanged: _.onPageChanged,
-            physics: BouncingScrollPhysics(),
-            itemBuilder: (context, index) {
-              return CustomPaint(
-                painter: ImagePainter(
-                  endAyaX: _.ayaPaintPoints['endAyaX'] ?? 0,
-                  endAyaY: _.ayaPaintPoints['endAyaY'] ?? 0,
-                  prevAyaX: _.ayaPaintPoints['prevAyaX'] ?? 0,
-                  prevAyaY: _.ayaPaintPoints['prevAyaY'] ?? 0,
-                ),
-                child: GestureDetector(
-                  onLongPressEnd: (details) {
-                    _.getAyaPaintPoints(
-                        details.localPosition.dx, details.localPosition.dy);
-                  },
-                  child: CachedNetworkImage(
-                    imageUrl:
-                        "https://hquran.net/quran/hafs/imagesv2/$index.png",
-                    placeholder: (context, url) => Center(
-                        child: CircularProgressIndicator(
-                      strokeWidth: 1,
-                    )),
-                    errorWidget: (context, url, error) => Icon(Icons.error),
-                  ),
-                ),
-              );
-            },
-          ),
+        body: Column(
+          children: [
+            Container(
+              height: loc.quranScaledHeight,
+              child: PageView.builder(
+                itemCount: 605,
+                controller: _.pageController,
+                onPageChanged: _.onPageChanged,
+                physics: BouncingScrollPhysics(),
+                itemBuilder: (context, index) {
+                  return CustomPaint(
+                    painter: ImagePainter(
+                      endAyaX: _.ayaPaintPoints['endAyaX'] ?? 0,
+                      endAyaY: _.ayaPaintPoints['endAyaY'] ?? 0,
+                      prevAyaX: _.ayaPaintPoints['prevAyaX'] ?? 0,
+                      prevAyaY: _.ayaPaintPoints['prevAyaY'] ?? 0,
+                    ),
+                    child: GestureDetector(
+                      onLongPressEnd: (details) {
+                        _.getAyaPaintPoints(
+                            details.localPosition.dx, details.localPosition.dy);
+                      },
+                      child: CachedNetworkImage(
+                        imageUrl:
+                            "https://hquran.net/quran/hafs/imagesv2/$index.png",
+                        placeholder: (context, url) => Center(
+                            child: CircularProgressIndicator(
+                          strokeWidth: 1,
+                        )),
+                        errorWidget: (context, url, error) => Icon(Icons.error),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Slider(
+              value: _.index.toDouble(),
+              min: 1,
+              max: 605,
+              divisions: 605,
+              label: _.index.toString(),
+              onChangeEnd: (d) {
+                _.index = d.toInt();
+                _.pageController.animateToPage(_.index,
+                    duration: Duration(milliseconds: 300),
+                    curve: Curves.easeInOut);
+              },
+              onChanged: (d) {
+                _.index = d.toInt();
+                _.update();
+              },
+            ),
+          ],
         ),
       );
     });
