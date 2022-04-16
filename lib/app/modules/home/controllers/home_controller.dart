@@ -170,7 +170,7 @@ class HomeController extends GetxController {
   }
 
   _startCounter() {
-    Timer.periodic(Duration(minutes: 1), (t) {
+    Timer.periodic(Duration(seconds: 1), (t) {
       _getNextPrayerTime();
     });
   }
