@@ -8,7 +8,7 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<GetStorage>(
-      () => GetStorage("jawza"),
+      () => GetStorage("jawzaAPP"),
     );
     Get.lazyPut<AdhanTimeProvider>(
       () => AdhanTimeProvider(),

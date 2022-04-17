@@ -7,7 +7,7 @@ import 'app/routes/app_pages.dart';
 import 'index.dart';
 
 Future<void> main() async {
-  await GetStorage.init("jawza");
+  await GetStorage.init("jawzaAPP");
   runApp(
     Sizer(
       builder: (context, orientation, deviceType) => GetMaterialApp(

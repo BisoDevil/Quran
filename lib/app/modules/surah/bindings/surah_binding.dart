@@ -15,7 +15,7 @@ class SurahBinding extends Bindings {
       () => SurahProvider(),
     );
     Get.lazyPut<GetStorage>(
-      () => GetStorage("jawza"),
+      () => GetStorage("jawzaAPP"),
     );
     Get.lazyPut<SurahController>(
       () => SurahController(),
