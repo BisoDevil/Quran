@@ -35,6 +35,13 @@ class HomeController extends GetxController {
   }
 
   _getCurrentCity() async {
+    var _now = DateTime.now();
+    if (_box.hasData("adhan-${_now.day}")) {
+      var cached = AdhanTime.fromJson(_box.read('adhan-${_now.day}'));
+
+      adhanTime = cached;
+      update();
+    }
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_serviceEnabled) {
       _permission = await Geolocator.requestPermission();
@@ -43,10 +50,13 @@ class HomeController extends GetxController {
     if (_permission == LocationPermission.denied) {
       _permission = await Geolocator.requestPermission();
     }
-    var pos = await Geolocator.getCurrentPosition();
+    var pos = await Geolocator.getCurrentPosition(
+      desiredAccuracy: LocationAccuracy.medium,
+    );
 
     adhanTime = await _adhanTimeProvider.getAdhanTime(
         pos.latitude, pos.longitude, DateTime.now());
+
     _nextAdhan = await _adhanTimeProvider.getAdhanTime(
         pos.latitude, pos.longitude, DateTime.now().add(Duration(days: 1)));
     List<Placemark> placemarks = await placemarkFromCoordinates(

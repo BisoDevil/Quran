@@ -12,19 +12,12 @@ class AdhanTimeProvider extends GetConnect {
   Future<AdhanTime?> getAdhanTime(
       double latitude, double longitude, DateTime date) async {
     /// Check now date to get it from cache first
-    var _now = DateTime.now();
-    if (date.year == _now.year &&
-        date.month == _now.month &&
-        date.day == _now.day &&
-        _box.hasData('adhan')) {
-      var map = _box.read("adhan");
-      print("from cache");
-      return AdhanTime.fromJson(map);
-    } else {
-      final response = await httpClient.get(
-          'timings?latitude=$latitude&longitude=$longitude&date_or_timestamp=${DateFormat('DD-MM-YYYY').format(date)}');
-      await _box.write("adhan", response.body);
-      return AdhanTime.fromJson(response.body);
-    }
+
+    final response = await httpClient.get(
+        'timings?latitude=$latitude&longitude=$longitude&date_or_timestamp=${DateFormat('DD-MM-YYYY').format(date)}');
+
+    await _box.write("adhan-${date.day}", response.body);
+
+    return AdhanTime.fromJson(response.body);
   }
 }
