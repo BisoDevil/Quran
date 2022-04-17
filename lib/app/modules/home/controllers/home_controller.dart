@@ -28,20 +28,24 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    _getAdhanFromCache();
     _getCurrentCity();
     getData();
 
     super.onInit();
   }
 
-  _getCurrentCity() async {
+  _getAdhanFromCache() {
     var _now = DateTime.now();
     if (_box.hasData("adhan-${_now.day}")) {
       var cached = AdhanTime.fromJson(_box.read('adhan-${_now.day}'));
 
       adhanTime = cached;
-      update();
+      _getNextPrayerTime();
     }
+  }
+
+  _getCurrentCity() async {
     _serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!_serviceEnabled) {
       _permission = await Geolocator.requestPermission();
@@ -73,7 +77,6 @@ class HomeController extends GetxController {
     if (_box.hasData("khatma")) {
       info.value = _box.read('surahName') ?? '';
       surahNo.value = _box.read("khatma") ?? 0;
-
       percent.value = (_box.read("khatma") ?? 0) / 605;
       update();
     }
