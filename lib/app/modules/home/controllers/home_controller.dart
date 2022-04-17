@@ -39,8 +39,11 @@ class HomeController extends GetxController {
     var _now = DateTime.now();
     if (_box.hasData("adhan-${_now.day}")) {
       var cached = AdhanTime.fromJson(_box.read('adhan-${_now.day}'));
-
       adhanTime = cached;
+      if (_box.hasData("adhan-${_now.day + 1}")) {
+        var _next = AdhanTime.fromJson(_box.read('adhan-${_now.day + 1}'));
+        _nextAdhan = _next;
+      }
       _getNextPrayerTime();
     }
   }
@@ -54,9 +57,7 @@ class HomeController extends GetxController {
     if (_permission == LocationPermission.denied) {
       _permission = await Geolocator.requestPermission();
     }
-    var pos = await Geolocator.getCurrentPosition(
-      desiredAccuracy: LocationAccuracy.medium,
-    );
+    var pos = await Geolocator.getCurrentPosition();
 
     adhanTime = await _adhanTimeProvider.getAdhanTime(
         pos.latitude, pos.longitude, DateTime.now());
