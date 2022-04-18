@@ -24,7 +24,7 @@ extension FormatDuration on Duration {
   }
 }
 
-String getVerseEndSymbol(int verseNumber) {
+String getVerseEndSymbol(int? verseNumber) {
   var arabicNumeric = '';
   var digits = verseNumber.toString().split("").toList();
 

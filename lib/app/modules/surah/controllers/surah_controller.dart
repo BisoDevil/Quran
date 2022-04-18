@@ -16,9 +16,9 @@ class SurahController extends GetxController {
   List<AyaModel> ayat = [];
   // AyaModel? currentAya;
   bool lineHasNoAya = false;
-  Map<String, int> ayaPaintPoints = {};
+  Map<String, dynamic> ayaPaintPoints = {};
   bool foundAya = false;
-  late AyaModel currentAya;
+  AyaModel? currentAya;
   int index = 1;
 
   @override
@@ -30,14 +30,17 @@ class SurahController extends GetxController {
   @override
   void onClose() {
     if (popupMenu.isShow) popupMenu.fastDismiss();
+    _box.write('lastSavedPage', currentAya?.page);
     super.onClose();
   }
 
   _getAyahs() async {
-    bool fromKhatma = Get.arguments['fromKhatma'];
-
+    bool fromKhatma = Get.arguments['fromKhatma'] ?? false;
+    bool fromLastSaved = Get.arguments['fromLastSaved'] ?? false;
     if (fromKhatma) {
       index = _box.read('khatma') ?? 0;
+    } else if (fromLastSaved) {
+      index = _box.read('lastSavedPage') ?? 1;
     } else {
       var no = Get.arguments['surah'];
       index = await _surahProvider.getPageNumber(suraNumber: no, ayaNumber: 1);
@@ -49,6 +52,10 @@ class SurahController extends GetxController {
 
     WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       pageController.jumpToPage(index);
+      if (_box.hasData('ayaLocation') && index == _box.read('khatma')) {
+        ayaPaintPoints = _box.read('ayaLocation');
+        update();
+      }
     });
   }
 
@@ -149,7 +156,7 @@ class SurahController extends GetxController {
             };
             foundAya = true;
             currentAya = ayat[ayaIndex2];
-            print('Current Aya: ${currentAya.pureText}');
+            print('Current Aya: ${currentAya?.pureText}');
 
             break;
           } else if (positionX > loc.getScaledX(reversedAyatInLine[a].xn)) {
@@ -161,7 +168,7 @@ class SurahController extends GetxController {
             };
             foundAya = true;
             currentAya = ayat[ayaIndex];
-            print('Current Aya: ${currentAya.pureText}');
+            print('Current Aya: ${currentAya?.pureText}');
           }
 
           //* THERE IS NO AYA WE ARE BIGGER THAN
@@ -175,7 +182,7 @@ class SurahController extends GetxController {
               'prevAyaY': ayat[ayaIndex + (ayatInLine.length - 1)].yn,
             };
             currentAya = ayat[ayaIndex + ayatInLine.length];
-            print('Current Aya: ${currentAya.pureText}');
+            print('Current Aya: ${currentAya?.pureText}');
           }
         }
 

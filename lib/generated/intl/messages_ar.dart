@@ -53,6 +53,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "quran": MessageLookupByLibrary.simpleMessage("القران"),
         "repeatTimes": m4,
         "share": MessageLookupByLibrary.simpleMessage("مشاركة"),
+        "startYoutKhatma": MessageLookupByLibrary.simpleMessage("ابدا الختمه"),
         "youreDone": MessageLookupByLibrary.simpleMessage("اكتمل يومك")
       };
 }

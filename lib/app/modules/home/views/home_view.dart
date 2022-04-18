@@ -95,7 +95,10 @@ class HomeView extends GetView<HomeController> {
                         title: S.of(context).quran,
                         svgPath: "assets/icons/quran_book.svg",
                         onPressed: () {
-                          Get.toNamed(Routes.QURAN_INDEX);
+                          // Get.toNamed(Routes.QURAN_INDEX);
+                          Get.toNamed(Routes.SURAH, arguments: {
+                            "fromLastSaved": true,
+                          });
                         },
                       ),
                       OptionWidget(

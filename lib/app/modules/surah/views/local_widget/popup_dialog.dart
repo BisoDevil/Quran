@@ -169,12 +169,17 @@ class PopupMenu {
                                             "khatma",
                                             Get.find<SurahController>()
                                                 .currentAya
-                                                .page);
+                                                ?.page);
                                         await _box.write(
                                             "surahName",
                                             Get.find<SurahController>()
                                                 .currentAya
-                                                .surahName);
+                                                ?.surahName);
+                                        //
+                                        await _box.write(
+                                            "ayaLocation",
+                                            Get.find<SurahController>()
+                                                .ayaPaintPoints);
                                         Get.find<HomeController>().getData();
                                       },
                                       child: Column(
@@ -197,8 +202,8 @@ class PopupMenu {
                                       onTap: () async {
                                         var text = Get.find<SurahController>()
                                             .currentAya
-                                            .text;
-                                        await Share.share(text);
+                                            ?.text;
+                                        await Share.share(text ?? "");
                                       },
                                       child: Column(
                                         mainAxisAlignment:
@@ -220,9 +225,9 @@ class PopupMenu {
                                       onTap: () async {
                                         var text = Get.find<SurahController>()
                                             .currentAya
-                                            .tafseer;
+                                            ?.tafseer;
                                         Get.bottomSheet(TafseerBottomSheet(
-                                          text: text,
+                                          text: text ?? "",
                                         ));
                                       },
                                       child: Column(

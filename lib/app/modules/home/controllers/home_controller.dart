@@ -20,6 +20,7 @@ class HomeController extends GetxController {
   var surahNo = 1.obs;
   var info = "".obs;
   var percent = 0.0.obs;
+
   AdhanTime? adhanTime, _nextAdhan;
   final AdhanTimeProvider _adhanTimeProvider = Get.find<AdhanTimeProvider>();
   final GetStorage _box = Get.find<GetStorage>();
@@ -44,6 +45,7 @@ class HomeController extends GetxController {
         var _next = AdhanTime.fromJson(_box.read('adhan-${_now.day + 1}'));
         _nextAdhan = _next;
       }
+
       _getNextPrayerTime();
     }
   }

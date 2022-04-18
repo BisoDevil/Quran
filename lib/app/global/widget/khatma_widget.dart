@@ -14,7 +14,7 @@ class KhatmaWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onPressed,
+      onTap: info.isEmpty ? null : onPressed,
       child: Card(
         color: Color(0xffE1D3B0),
         shape: RoundedRectangleBorder(
@@ -41,7 +41,9 @@ class KhatmaWidget extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                       Text(
-                        S.of(context).lastReadInfo(info),
+                        info.isEmpty
+                            ? S.of(context).startYoutKhatma
+                            : S.of(context).lastReadInfo(info),
                       ),
                       Spacer(),
                       Row(

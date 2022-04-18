@@ -1,5 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:quran/app/global/controller/dimension.dart';
+import 'package:quran/app/routes/app_pages.dart';
 import 'package:quran/app/util/constants.dart';
 
 import 'package:quran/app/util/image_painter.dart';
@@ -19,10 +20,15 @@ class SurahView extends GetView<SurahController> {
         appBar: AppBar(
           title: Row(
             children: [
-              Image.asset(
-                'assets/surahs/sname_${controller.currentAya.sura}.png',
-                height: kToolbarHeight * .7,
-                color: Constants.tintColor,
+              InkWell(
+                onTap: () {
+                  Get.offNamed(Routes.QURAN_INDEX);
+                },
+                child: Image.asset(
+                  'assets/surahs/sname_${controller.currentAya?.sura ?? 1}.png',
+                  height: kToolbarHeight * .7,
+                  color: Constants.tintColor,
+                ),
               ),
               Spacer(),
               Image.asset(
@@ -31,7 +37,7 @@ class SurahView extends GetView<SurahController> {
                 color: Constants.tintColor,
               ),
               Text(
-                " ${getVerseEndSymbol(_.currentAya.juz)} ",
+                " ${getVerseEndSymbol(_.currentAya?.juz)} ",
                 style: TextStyle(
                   color: Constants.tintColor,
                 ),
@@ -42,7 +48,7 @@ class SurahView extends GetView<SurahController> {
                 color: Constants.tintColor,
               ),
               Text(
-                " ${getVerseEndSymbol(_.currentAya.hezb)} ",
+                " ${getVerseEndSymbol(_.currentAya?.hezb)} ",
                 style: TextStyle(
                   color: Constants.tintColor,
                 ),
