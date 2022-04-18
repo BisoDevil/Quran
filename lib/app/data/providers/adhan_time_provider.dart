@@ -14,7 +14,7 @@ class AdhanTimeProvider extends GetConnect {
     /// Check now date to get it from cache first
 
     final response = await httpClient.get(
-        'timings?latitude=$latitude&longitude=$longitude&date_or_timestamp=${DateFormat('DD-MM-YYYY').format(date)}');
+        'timings?latitude=$latitude&longitude=$longitude&date_or_timestamp=${DateFormat('DD-MM-YYYY').format(date)}&method=4');
 
     await _box.write("adhan-${date.day}", response.body);
 
